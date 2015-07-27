@@ -1,0 +1,377 @@
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AdminLogin]'))
+BEGIN
+CREATE TABLE [dbo].[AdminLogin]
+(
+	[adminLogin_ID] [int] NOT NULL IDENTITY(1,1),
+	[login] [int] NOT NULL,
+	[password] [varchar] (30) NOT NULL,
+	[attempts] [int] NOT NULL,
+	[email] [varchar](30) NOT NULL,
+	[permissions] [varchar](30) NOT NULL
+
+	CONSTRAINT [PK_AdminLogin] PRIMARY KEY CLUSTERED 
+	(
+		[adminLogin_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Category]'))
+BEGIN
+CREATE TABLE [dbo].[Category]
+(
+	[category_ID] [int] NOT NULL IDENTITY(1,1),
+	[adminLogin_ID] [int] NOT NULL,
+	[subcategory_ID] [int] NOT NULL,
+	[name] [varchar] (50) NOT NULL,
+	[description] [varchar] (200) NOT NULL
+
+	CONSTRAINT [PK_Category]  PRIMARY KEY CLUSTERED 
+	(
+		[category_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Subcategory]'))
+BEGIN
+CREATE TABLE [dbo].[Subcategory]
+(
+	[subcategory_ID] [int] NOT NULL IDENTITY(1,1),
+	[name] [varchar] (50) NOT NULL,
+	[description] [varchar] (200) NOT NULL
+
+	CONSTRAINT [PK_Subcategory] PRIMARY KEY CLUSTERED
+	(
+		[subcategory_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ProductStatus]'))
+BEGIN
+CREATE TABLE [dbo].[ProductStatus]
+(
+	[productStatus_ID] [int] NOT NULL IDENTITY(1,1),
+	[statusCode] [varchar] (30) NOT NULL,
+	[description] [varchar] (200) NOT NULL
+
+	CONSTRAINT [PK_[ProductStatus] PRIMARY KEY CLUSTERED
+	(
+		[productStatus_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ShippingAddress]'))
+BEGIN
+CREATE TABLE [dbo].[ShippingAddress]
+(
+	[shippingAddress_ID] [int] NOT NULL IDENTITY(1,1),
+	[customer_ID] [int] NOT NULL,
+	[CustomerAddress_ID] [int] NOT NULL,
+	[name] [varchar] (50) NOT NULL,
+	[street1] [varchar] (100) NOT NULL,
+	[street2] [varchar] (100),
+	[city] [varchar] (100) NOT NULL,
+	[state] [varchar] (2) NOT NULL,
+	[zipcode] [varchar] (5) NOT NULL
+
+	CONSTRAINT [PK_ShippingAddress] PRIMARY KEY CLUSTERED
+	(
+		[shippingAddress_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Services]'))
+BEGIN
+CREATE TABLE [dbo].[Services]
+(
+	[service_id] [int] NOT NULL IDENTITY(1,1),
+	[category_id] [int] NOT NULL,
+	[name] [varchar] (50) NOT NULL,
+	[description] [varchar] (200) NOT NULL
+
+	CONSTRAINT [PK_Service] PRIMARY KEY CLUSTERED
+	(
+		[service_id] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Product]'))
+BEGIN
+CREATE TABLE [dbo].[Product]
+(
+	[product_ID] [int] NOT NULL IDENTITY(1,1),
+	[category_ID] [int] NOT NULL,
+	[productStatus_ID] [int] NOT NULL,
+	[name] [varchar] (50) NOT NULL,
+	[description] [varchar] (200) NOT NULL,
+	[price] [decimal] (18,2) NOT NULL,
+	[quantity] [int] NOT NULL,
+	[image] [varchar] (200) NOT NULL
+
+	CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED
+	(
+		[product_id] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[OrderDetails]'))
+BEGIN
+CREATE TABLE [dbo].[OrderDetails]
+(
+	[orderDetails_ID] [int] NOT NULL IDENTITY(1,1),
+	[product_ID] [int] NOT NULL,
+	[quantity] [int] NOT NULL,
+	[total] [decimal] (18,2) NOT NULL
+
+	CONSTRAINT [PK_OrderDetails] PRIMARY KEY CLUSTERED
+	(
+		[orderDetails_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Customer]'))
+BEGIN
+CREATE TABLE [dbo].[Customer]
+(
+	[customer_ID] [int] NOT NULL IDENTITY(1,1),
+	[firstName] [varchar] (30) NOT NULL,
+	[lastName] [varchar] (30) NOT NULL,
+	[email] [varchar] (30) NOT NULL,
+	[phone] [varchar] (10) NOT NULL
+
+	CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED
+	(
+		[customer_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Orders]'))
+BEGIN
+CREATE TABLE [dbo].[Orders]
+(
+	[order_ID] [int] NOT NULL IDENTITY(1,1),
+	[customer_ID] [int] NOT NULL,
+	[shippingAddress_ID] [int] NOT NULL,
+	[customerBilling_ID] [int] NOT NULL,
+	[orderDetails_ID] [int] NOT NULL,
+	[orderStatus_ID] [int] NOT NULL,
+	[shippingMethod_ID] [int] NOT NULL,
+	[orderDate] [date] NOT NULL,
+	[tax] [decimal] (18,2) NOT NULL,
+	[grandTotal] [decimal] (18,2) NOT NULL
+	
+	CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED
+	(
+		[order_id] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CustomerBilling]'))
+BEGIN
+CREATE TABLE [dbo].[CustomerBilling]
+(
+	[customerBilling_ID] [int] NOT NULL IDENTITY(1,1),
+	[cardType] [int] NOT NULL,
+	[cardNumber] [varchar] (16) NOT NULL,
+	[expireDate] [date] NOT NULL
+
+	CONSTRAINT [PK_CustomerBilling] PRIMARY KEY CLUSTERED
+	(
+		[customerBilling_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CustomerLogin]'))
+BEGIN
+CREATE TABLE [dbo].[CustomerLogin]
+(
+	[customerLogin_ID] [int] NOT NULL IDENTITY(1,1),
+	[customer_ID] [int] NOT NULL,
+	[login] [varchar] (50) NOT NULL,
+	[password] [varchar] (50) NOT NULL,
+	[dateCreated] [date] NOT NULL
+	
+	CONSTRAINT [PK_CustomerLogin] PRIMARY KEY CLUSTERED
+	(
+		[customerLogin_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CustomerAddress]'))
+BEGIN
+CREATE TABLE [dbo].[CustomerAddress]
+(
+	[customerAddress_ID] [int] NOT NULL IDENTITY(1,1),
+	[address1] [varchar] (50) NOT NULL,
+	[address2] [varchar] (50),
+	[city] [varchar] (50) NOT NULL,
+	[state] [varchar] (2) NOT NULL,
+	[zip] [varchar] (5) NOT NULL
+	
+	CONSTRAINT [PK_CustomerAddress] PRIMARY KEY CLUSTERED
+	(
+		[customerAddress_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[OrderStatus]'))
+BEGIN
+CREATE TABLE [dbo].[OrderStatus]
+(
+	[orderStatus_ID] [int] NOT NULL IDENTITY(1,1),
+	[statusCode] [int] NOT NULL,
+	[description] [varchar] (200) NOT NULL
+
+	CONSTRAINT [PK_OrderStatus] PRIMARY KEY CLUSTERED
+	(
+		[orderStatus_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ShippingMethod]'))
+BEGIN
+CREATE TABLE [dbo].[ShippingMethod]
+(
+	[shippingMethod_ID] [int] NOT NULL IDENTITY(1,1),
+	[type] [varchar] (50) NOT NULL,
+	[shippingCost] [decimal] (18,2) NOT NULL
+	
+	CONSTRAINT [PK_ShippingMethod] PRIMARY KEY CLUSTERED
+	(
+		[shippingMethod_ID] ASC
+	)
+	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
+)
+ON [PRIMARY]
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Category_AdminLogin]') AND parent_object_id = OBJECT_ID(N'[dbo].[Category]'))
+ALTER TABLE [dbo].[Category]  WITH CHECK ADD  CONSTRAINT [FK_Category_AdminLogin] FOREIGN KEY([adminLogin_ID])
+REFERENCES [dbo].[AdminLogin] ([adminLogin_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Category_Subcategory]') AND parent_object_id = OBJECT_ID(N'[dbo].[Category]'))
+ALTER TABLE [dbo].[Category]  WITH CHECK ADD  CONSTRAINT [FK_Category_Subcategory] FOREIGN KEY([subcategory_ID])
+REFERENCES [dbo].[Subcategory] ([subcategory_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ShippingAddress_Customer]') AND parent_object_id = OBJECT_ID(N'[dbo].[ShippingAddress]'))
+ALTER TABLE [dbo].[ShippingAddress]  WITH CHECK ADD  CONSTRAINT [FK_ShippingAddress_Customer] FOREIGN KEY([customer_ID])
+REFERENCES [dbo].[Customer] ([customer_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ShippingAddress_CustomerAddress]') AND parent_object_id = OBJECT_ID(N'[dbo].[ShippingAddress]'))
+ALTER TABLE [dbo].[ShippingAddress]  WITH CHECK ADD  CONSTRAINT [FK_ShippingAddress_CustomerAddress] FOREIGN KEY([customerAddress_ID])
+REFERENCES [dbo].[CustomerAddress] ([customerAddress_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Service_Category]') AND parent_object_id = OBJECT_ID(N'[dbo].[Services]'))
+ALTER TABLE [dbo].[Services]  WITH CHECK ADD  CONSTRAINT [FK_Service_Category] FOREIGN KEY([category_ID])
+REFERENCES [dbo].[Category] ([category_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Product_Category]') AND parent_object_id = OBJECT_ID(N'[dbo].[Category]'))
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_Category] FOREIGN KEY([category_ID])
+REFERENCES [dbo].[Category] ([category_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Product_ProductStatus]') AND parent_object_id = OBJECT_ID(N'[dbo].[ProductStatus]'))
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_ProductStatus] FOREIGN KEY([productStatus_ID])
+REFERENCES [dbo].[ProductStatus] ([productStatus_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_OrderDetails_Product]') AND parent_object_id = OBJECT_ID(N'[dbo].[Product]'))
+ALTER TABLE [dbo].[OrderDetails]  WITH CHECK ADD  CONSTRAINT [FK_OrderDetails_Product] FOREIGN KEY([product_ID])
+REFERENCES [dbo].[Product] ([product_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_Customer]') AND parent_object_id = OBJECT_ID(N'[dbo].[Customer]'))
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_Customer] FOREIGN KEY([customer_ID])
+REFERENCES [dbo].[Customer] ([customer_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_ShippingAddress]') AND parent_object_id = OBJECT_ID(N'[dbo].[ShippingAddress]'))
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_ShippingAddress] FOREIGN KEY([shippingAddress_ID])
+REFERENCES [dbo].[ShippingAddress] ([shippingAddress_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_CustomerBilling]') AND parent_object_id = OBJECT_ID(N'[dbo].[CustomerBilling]'))
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_CustomerBilling] FOREIGN KEY([customerBilling_ID])
+REFERENCES [dbo].[CustomerBilling] ([customerBilling_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_OrderDetails]') AND parent_object_id = OBJECT_ID(N'[dbo].[OrderDetails]'))
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_OrderDetails] FOREIGN KEY([orderDetails_ID])
+REFERENCES [dbo].[OrderDetails] ([orderDetails_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_OrderStatus]') AND parent_object_id = OBJECT_ID(N'[dbo].[OrderStatus]'))
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_OrderStatus] FOREIGN KEY([orderStatus_ID])
+REFERENCES [dbo].[OrderStatus] ([orderStatus_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_ShippingMethod]') AND parent_object_id = OBJECT_ID(N'[dbo].[ShippingMethod]'))
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_ShippingMethod] FOREIGN KEY([shippingMethod_ID])
+REFERENCES [dbo].[ShippingMethod] ([shippingMethod_ID])
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_CustomerLogin_Customer]') AND parent_object_id = OBJECT_ID(N'[dbo].[Customer]'))
+ALTER TABLE [dbo].[CustomerLogin]  WITH CHECK ADD  CONSTRAINT [FK_CustomerLogin_Customer] FOREIGN KEY([customer_ID])
+REFERENCES [dbo].[Customer] ([customer_ID])
+GO
