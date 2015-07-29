@@ -82,9 +82,7 @@ CREATE TABLE [dbo].[ShippingAddress]
 	[shippingAddress_ID] [int] NOT NULL IDENTITY(1,1),
 	[customer_ID] [int] NOT NULL,
 	[CustomerAddress_ID] [int] NOT NULL,
-	[name] [varchar] (50) NOT NULL,
-	[street1] [varchar] (100) NOT NULL,
-	[street2] [varchar] (100),
+	[address1] [varchar] (100) NOT NULL,
 	[city] [varchar] (100) NOT NULL,
 	[state] [varchar] (2) NOT NULL,
 	[zipcode] [varchar] (5) NOT NULL
@@ -191,7 +189,7 @@ CREATE TABLE [dbo].[Orders]
 	[orderDetails_ID] [int] NOT NULL,
 	[orderStatus_ID] [int] NOT NULL,
 	[shippingMethod_ID] [int] NOT NULL,
-	[orderDate] [date] NOT NULL,
+	[orderDate] [date] NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	[tax] [decimal] (18,2) NOT NULL,
 	[grandTotal] [decimal] (18,2) NOT NULL
 	
@@ -232,7 +230,7 @@ CREATE TABLE [dbo].[CustomerLogin]
 	[customer_ID] [int] NOT NULL,
 	[login] [varchar] (50) NOT NULL,
 	[password] [varchar] (50) NOT NULL,
-	[dateCreated] [date] NOT NULL
+	[dateCreated] [date] NOT NULL DEFAULT CURRENT_TIMESTAMP
 	
 	CONSTRAINT [PK_CustomerLogin] PRIMARY KEY CLUSTERED
 	(
