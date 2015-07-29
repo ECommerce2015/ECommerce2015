@@ -45,11 +45,11 @@
             <div class="header_bottom">
                 <div class="menu">
                     <ul>
-                        <li class="active"><a href="~/Home">Home</a></li>
-                        <li><a href="~/Home/About">About</a></li>
-                        <li><a href="~/Home/Delivery">Delivery</a></li>
-                        <li><a href="~/Home/News">News</a></li>
-                        <li><a href="~/Home/Contact">Contact</a></li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" ? "active" : "")">@Html.ActionLink("About", "About", "Home")</li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Delivery" ? "active" : "")">@Html.ActionLink("Delivery", "Delivery", "Home")</li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "News" ? "active" : "")">@Html.ActionLink("News", "News", "Home")</li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : "")">@Html.ActionLink("Contact", "Contact", "Home")</li>
                         <div class="clear"></div>
                     </ul>
                 </div>
