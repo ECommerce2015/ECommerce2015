@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Capstone.Models;
 
 namespace Capstone.Controllers
 {
     public class HomeController : Controller
     {
+
+        private CategoryEntities category = new CategoryEntities(); 
+        [HttpGet]
+
         public ActionResult Index()
         {
+            ViewBag.listCategories = category.Categories.ToList();
             return View();
         }
 
