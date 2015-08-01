@@ -44,6 +44,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -132,23 +134,31 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\AdminLogin.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\CustomerAddress.cs" />
-    <Compile Include="Models\CustomerBilling.cs" />
-    <Compile Include="Models\CustomerLogin.cs" />
+    <Compile Include="Models\Category.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Category.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>Category.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Category.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Category.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\OrderStatus.cs" />
-    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductStatus.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\RegisteredUser.cs" />
     <Compile Include="Models\Services.cs" />
-    <Compile Include="Models\ShippingAddress.cs" />
-    <Compile Include="Models\ShippingMethod.cs" />
-    <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +171,23 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\easing.js" />
     <Content Include="Scripts\easyResponsiveTabs.js" />
+    <EntityDeploy Include="Models\Category.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Category.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Category.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Category.edmx</DependentUpon>
+      <LastGenOutput>Category.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Category.edmx.diagram">
+      <DependentUpon>Category.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Category.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Category.edmx</DependentUpon>
+      <LastGenOutput>Category1.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -204,6 +231,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
