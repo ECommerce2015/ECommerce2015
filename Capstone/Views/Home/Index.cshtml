@@ -5,9 +5,9 @@
         <div class="categories">
             <ul>
                 <h3>Categories</h3>
-                @foreach(Category categories in ViewBag.listCategories)
+                @foreach (Category categories in ViewBag.listCategories)
                 {
-                    <li><a href="">@categories.name</a></li>
+                    <li>@Html.ActionLink(categories.name, "Products", new { category_ID = categories.category_ID }, null)</li>
                 }
             </ul>
         </div>

@@ -50,5 +50,11 @@ namespace Capstone.Controllers
 
             return View();
         }
+        public ActionResult Products(int category_ID)
+        {
+            //this will redirect to the Product controller Products method
+            //simply allows you to jump to another controller
+            return RedirectToAction("Products", "Product", new { category_ID = category_ID });
+        }
     }
 }
