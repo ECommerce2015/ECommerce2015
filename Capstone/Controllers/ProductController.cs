@@ -125,10 +125,11 @@ namespace Capstone.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (ProductEntities pd = new ProductEntities())
+                using (ProductEntities context = new ProductEntities())
                 {
                     Product productData = new Product();
-                    var product = pd.Products.ToList();
+                    
+                    var product = context.Products.Where(table => table.category_ID == category_ID).ToList();
                     if (product != null)
                     {
                         ViewBag.productData = product;
