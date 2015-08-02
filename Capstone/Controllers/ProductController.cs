@@ -128,7 +128,7 @@ namespace Capstone.Controllers
                 using (ProductEntities pd = new ProductEntities())
                 {
                     Product productData = new Product();
-                    var product = pd.Products.Find(category_ID);
+                    var product = pd.Products.ToList();
                     if (product != null)
                     {
                         ViewBag.productData = product;
