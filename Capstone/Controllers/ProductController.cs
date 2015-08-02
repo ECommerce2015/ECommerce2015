@@ -139,5 +139,28 @@ namespace Capstone.Controllers
             }
             return View();
         }
+        public ActionResult ProductView(int product_ID) 
+        {
+            using (ProductEntities context = new ProductEntities())
+            {
+                Product productData = new Product();
+                //this will allow you to query for the selected category ID
+                var product = context.Products.Where(table => table.product_ID == product_ID).ToList();
+                if (product != null)
+                {
+                    ViewBag.productImage = product[0].image;
+                    ViewBag.productPrice = product[0].price;
+                    ViewBag.productName = product[0].name;
+                    ViewBag.productStarus = product[0].productStatus_ID;
+                    ViewBag.productDescription = product[0].description;
+                    int category_ID = product[0].category_ID;
+                }
+            }
+            return View();
+        }
+        public ActionResult AddToCart(int product_ID) 
+        {
+            return RedirectToAction("AddToCart", "Product", new { product_id = product_ID });
+        }
     }
 }
