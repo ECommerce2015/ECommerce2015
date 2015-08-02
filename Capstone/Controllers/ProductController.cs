@@ -128,7 +128,7 @@ namespace Capstone.Controllers
                 using (ProductEntities context = new ProductEntities())
                 {
                     Product productData = new Product();
-                    
+                    //this will allow you to query for the selected category ID
                     var product = context.Products.Where(table => table.category_ID == category_ID).ToList();
                     if (product != null)
                     {
