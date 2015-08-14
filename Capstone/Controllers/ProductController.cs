@@ -160,7 +160,8 @@ namespace Capstone.Controllers
         }
         public ActionResult AddToCart(int product_ID) 
         {
-            return RedirectToAction("AddToCart", "Product", new { product_id = product_ID });
+
+          return RedirectToAction("OrderNow", "ShoppingCart", new { product_id = product_ID });
         }
     }
 }

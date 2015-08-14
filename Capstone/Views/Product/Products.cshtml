@@ -29,7 +29,7 @@
                     </div>
                     <div class="add-cart">
                         <h4>
-                         @Html.ActionLink("Add To Cart", "AddToCart", new { product_id = p.product_ID }, null)
+                            @Html.ActionLink("Add To Cart", "OrderNow", "ShoppingCart", new { product_id = p.product_ID, category_id = p.category_ID }, null)
                         </h4>
                     </div>
                     <div class="clear"></div>

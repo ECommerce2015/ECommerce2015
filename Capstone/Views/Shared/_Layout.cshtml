@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Capstone</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @using Capstone.Models
 </head>
 <body>
     <div class="wrap">
@@ -29,16 +30,44 @@
                     <a href="~/Register/LoginRegister"><img src="~/images/logo.png" alt="" /></a>
                 </div>
                 <div class="cart">
-                    <p>
-                        Welcome to our Online Store! <span>Cart:</span><div id="dd" class="wrapper-dropdown-2">
-                            0 item(s) - $0.00
-                            <ul class="dropdown">
-                                <li>you have no items in your Shopping cart</li>
-                            </ul>
-                        </div>
+                    <p>                  
+                       Welcome to our Online Store! <span>Cart:</span>
+                       @if(Session["cart"]!=null)
+                        {
+                           <div id="dd" class="wrapper-dropdown-2">
+                               <ul class="dropdown">
+                                   <li class="dropdown">
+                                       <table>
+                                           <tr>
+                                               <th>Name</th>
+                                               <th>QTY</th>
+                                               <th>Price</th>
+                                           </tr>
+                                           @foreach (Item item in (List<Item>)Session["cart"])
+                                           {
+                                                <tr>
+
+                                                    <td>@item.Pr.name</td>
+                                                    <td>@item.Quantity</td>
+                                                    <td>@item.Pr.price</td>
+                                                </tr>
+                                           }
+                                       </table>
+                                    </li>
+                               </ul>
+                            </div>
+                        }
+                        else
+                        {
+                           <div id="dd" class="wrapper-dropdown-2">
+                              0 item(s) - $0.00
+                              <ul class="dropdown">
+                                  <li>you have no items in your Shopping cart</li>                               
+                              </ul>
+                           </div>
+                        }                       
                     </p>
-                </div>
-                
+                </div>                
                 <div class="clear"></div>
             </div>
             @*Nav bar*@
