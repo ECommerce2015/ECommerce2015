@@ -12,6 +12,9 @@ namespace Capstone.Models
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Security.Cryptography;
+    using System.Web.Security;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class CustomerLogin
     {
@@ -19,10 +22,15 @@ namespace Capstone.Models
 
         public int customerLogin_ID { get; set; }
         public int customer_ID { get; set; }
+        [Required]
+        [StringLength(50)]
         public string email { get; set; }
+        [Required]
+        [StringLength(50)]
         public string password { get; set; }
+        [Required]
         public System.DateTime dateCreated { get; set; }
-
+        
         public static CustomerLogin ConvertToProperty(DataRow dr)
         {
             CustomerLogin _customerLogin = new CustomerLogin();

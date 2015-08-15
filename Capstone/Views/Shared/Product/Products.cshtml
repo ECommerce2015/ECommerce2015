@@ -1,0 +1,28 @@
+﻿@model Capstone.Models.Product
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Capstone.Models;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table cellpadding="2" cellspacing="2" border="1">
+    <tr>
+        <th>category ID</th>
+        <th>name</th>
+        <th>Price</th>
+        <th>buy</th>
+    </tr>
+    @foreach (Product p in ViewBag.productData)
+    {
+        <tr>
+            <td>@p.category_ID</td>
+            <td>@p.name</td>
+            <td>@p.price</td>
+        </tr>
+    }
+</table>
+
