@@ -24,11 +24,21 @@ namespace Capstone
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
                       "~/Content/easy-responsive.css",
                       "~/Content/global.css",
                       "~/Content/slider.css",
                       "~/Content/style.css"));
+
+            bundles.Add(new StyleBundle("~/Content/morris").Include(
+                    "~/Content/morris.css"));
+
+            bundles.Add(new StyleBundle("~/Content/sb-admin").Include(
+                    "~/Content/sb-admin.css",
+                    "~/Content/sb-admin-rtl.css"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
+                    "~/Content/bootstrap.min.css",
+                    "~/Content/bootstrap-rtl.mins.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/javascript").Include(
                        "~/Scripts/easing.js",
@@ -43,6 +53,18 @@ namespace Capstone
                        "~/Scripts/layout.js",
                        "~/Scripts/validate.js",
                        "~/Scripts/registerForm.js"));
+            bundles.Add(new ScriptBundle("~/bundles/flot").Include(
+                "~/Scripts/excanvas.min.js",
+                "~/Scripts/flot-data.js",
+                "~/Scripts/jquery.flot.js",
+                "~/Scripts/jquery.flot.pie.js",
+                "~/Scripts/jquery.flot.resize.js",
+                "~/Scripts/jquery.flot.tooltip.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/morris").Include(
+                "~/Scripts/morris.js",
+                "~/Scripts/morris.mins.js",
+                "~/Scripts/morris-data.js",
+                "~/Scripts/raphael.mins.js"));            
         }
     }
 }

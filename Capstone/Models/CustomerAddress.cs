@@ -12,16 +12,36 @@ namespace Capstone.Models
     using System;
     using System.Collections.Generic;
     using System.Data;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class CustomerAddress
     {
         public CustomerAddress(){}
+        public CustomerAddress(string address1, string address2, string city, string state, string zip) 
+        {
+            this.address1 = address1;
+            this.address2 = address2;
+            this.city = city;
+            this.state = state;
+            this.zip = zip;
+        }
 
+        [Required]
+        [StringLength(30)]
         public int customerAddress_ID { get; set; }
+        [Required]
+        [StringLength(50)]
         public string address1 { get; set; }
+        [Required]
+        [StringLength(50)]
         public string address2 { get; set; }
+        [Required]
+        [StringLength(50)]
         public string city { get; set; }
+        [Required]
+        [StringLength(2)]
         public string state { get; set; }
+        [Required]
+        [StringLength(5)]
         public string zip { get; set; }
 
         public static CustomerAddress ConvertToProperty(DataRow dr)
