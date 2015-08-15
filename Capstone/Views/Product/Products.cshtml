@@ -1,28 +1,42 @@
-﻿@model Capstone.Models.Product
+﻿
 @{
     ViewBag.Title = "Products";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using Capstone.Models;
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<div class="main">
+    <div class="content">
+        <div class="content_top">
+            <div class="heading">
+                <h3>Products</h3>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section group">
+            @foreach (Product p in ViewBag.productData)
+            {
+            <div class="grid_1_of_4 images_1_of_4">
+               
+                <a href='@Url.Action("ProductView", "Product", new { product_ID = p.product_ID})'>
+                    <img src='@Url.Content(p.image)' />
+                </a>
 
-<table cellpadding="2" cellspacing="2" border="1">
-    <tr>
-        <th>category ID</th>
-        <th>name</th>
-        <th>Price</th>
-        <th>buy</th>
-    </tr>
-    @foreach (Product p in ViewBag.productData)
-    {
-        <tr>
-            <td>@p.category_ID</td>
-            <td>@p.name</td>
-            <td>@p.price</td>
-        </tr>
-    }
-</table>
+                <h2>Lorem Ipsum is simply </h2>
+                <div class="price-details">
+                    <div class="price-number">
+                        <p><span class="rupees">@p.price</span></p>
+                    </div>
+                    <div class="add-cart">
+                        <h4>
+                            @Html.ActionLink("Add To Cart", "OrderNow", "ShoppingCart", new { product_id = p.product_ID, category_id = p.category_ID }, null)
+                        </h4>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
 
