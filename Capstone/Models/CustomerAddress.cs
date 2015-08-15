@@ -26,22 +26,25 @@ namespace Capstone.Models
         }
 
         [Required]
-        [StringLength(30)]
         public int customerAddress_ID { get; set; }
         [Required]
-        [StringLength(50)]
+        [DataType(DataType.Text)]
+        [StringLength(50, ErrorMessage = "{0}: 50 is the limit")]
         public string address1 { get; set; }
         [Required]
-        [StringLength(50)]
+        [DataType(DataType.Text)]
+        [StringLength(50, ErrorMessage = "{0}: 50 is the limit")]
         public string address2 { get; set; }
         [Required]
-        [StringLength(50)]
+        [DataType(DataType.Text)]
+        [StringLength(50, ErrorMessage = "{0}: 50 is the limit")]
         public string city { get; set; }
         [Required]
         [StringLength(2)]
         public string state { get; set; }
         [Required]
-        [StringLength(5)]
+        [DataType(DataType.Text)]
+        [StringLength(5, ErrorMessage = "{0}: 5 is the limit")]
         public string zip { get; set; }
 
         public static CustomerAddress ConvertToProperty(DataRow dr)

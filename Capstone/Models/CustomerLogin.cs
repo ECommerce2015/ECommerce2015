@@ -23,9 +23,11 @@ namespace Capstone.Models
         public int customerLogin_ID { get; set; }
         public int customer_ID { get; set; }
         [Required]
+        [DataType(DataType.EmailAddress)]
         [StringLength(50)]
         public string email { get; set; }
         [Required]
+        [DataType(DataType.Password)]
         [StringLength(50)]
         public string password { get; set; }
         [Required]

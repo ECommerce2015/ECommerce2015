@@ -9,11 +9,8 @@ namespace Capstone.Controllers
 {
     public class RegistrationController : Controller
     {
-        //Entity objects
+        //Entity state object
         StateEntities sEntity = new StateEntities();
-        CustomerEntities cEntityy = new CustomerEntities(); 
-        CustomerAddressEntities caEntity = new CustomerAddressEntities();
-        CustomerLoginEntities clEntity = new CustomerLoginEntities();
         //
         // GET: /Registration/
         [HttpGet]
@@ -21,6 +18,17 @@ namespace Capstone.Controllers
         {
             ViewBag.StatesList = sEntity.States.ToList();
             return View("LoginRegister");
+        }
+
+        public JsonResult CheckEmail(Customer customer) 
+        {
+            bool answer;
+            using (CustomerEntities cEntity = new CustomerEntities())
+            {
+                var email = cEntity.Customers.Where(x=>x.email == customer.email).FirstOrDefault();
+                answer = (email != null) ? false : true;
+            }
+            return Json(answer, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -34,17 +42,27 @@ namespace Capstone.Controllers
                     //encrypt the password
                     customerLogin.password = HashKey.GetHashKey(customerLogin.password);
                     //inserting into customers table
-                    cEntityy.Customers.Add(customer);
-                    cEntityy.SaveChanges();
-                    //inserting into customer address table
-                    caEntity.CustomerAddresses.Add(customerAddress);
-                    caEntity.SaveChanges();
-
-
-                    //inserting into customer login table
-                    clEntity.CustomerLogins.Add(customerLogin);
-                    clEntity.SaveChanges();
-                    viewChange = "HomeDashBoard";
+                    using (CustomerEntities cEntityy = new CustomerEntities())
+                    { 
+                        cEntityy.Customers.Add(customer);
+                        cEntityy.SaveChanges();
+                    }
+                    using (CustomerAddressEntities caEntity = new CustomerAddressEntities())
+                    {
+                        //inserting into customer address table
+                        caEntity.CustomerAddresses.Add(customerAddress);
+                        caEntity.SaveChanges();
+                    }
+                    using (CustomerLoginEntities clEntity = new CustomerLoginEntities())
+                    {
+                        customerLogin.customer_ID = customer.customer_ID;
+                        customerLogin.email = customer.email;
+                        customerLogin.dateCreated = DateTime.Now;
+                        //inserting into customer login table
+                        clEntity.CustomerLogins.Add(customerLogin);
+                        clEntity.SaveChanges();
+                        viewChange = "HomeDashBoard";
+                    }
                 }
                 else 
                 {
@@ -52,7 +70,7 @@ namespace Capstone.Controllers
                 }
             }
             catch(EntryPointNotFoundException ex){}
-            catch(Exception ex){}
+            catch (Exception ex) { viewChange = "LoginRegister"; }
             return View(viewChange);
         }
 
