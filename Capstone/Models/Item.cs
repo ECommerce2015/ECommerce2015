@@ -31,5 +31,12 @@ namespace Capstone.Models
             get { return quantity; }
             set { quantity = value; }
         }
+
+        private int price;
+        public int Price
+        {
+            get { return price; }
+            set { price = value; }
+        }
     }
 }

@@ -39,6 +39,7 @@ namespace Capstone.Controllers
             {
                 List<Item> cart = (List<Item>)Session["cart"];
                 int index = isExisting(product_id);
+                
                 if (index == -1)
                 {
                     cart.Add(new Item(pe.Products.Find(product_id), 1));
@@ -46,6 +47,8 @@ namespace Capstone.Controllers
                 else 
                 {
                     cart[index].Quantity++;
+                    cart[index].Pr.price = cart[index].Price * cart[index].Quantity;
+                  
                 }
                 Session["cart"] = cart;
             }
