@@ -11,26 +11,26 @@ namespace Capstone.Models
 {
     using System;
     using System.Collections.Generic;
-using System.Data;
-
+    using System.Security.Cryptography;
+    using System.Web.Security;
+    using System.ComponentModel.DataAnnotations;
+    
     public partial class Customer
     {
-        public Customer(){}
-
         public int customer_ID { get; set; }
+        [Required]
+        [StringLength(30)]
         public string firstName { get; set; }
+        [Required]
+        [StringLength(30)]
         public string lastName { get; set; }
+        [Required]
+        [StringLength(30)]
         public string email { get; set; }
+        [Required]
+        [StringLength(10)]
         public string phone { get; set; }
-        public static Customer ConvertToProperty(DataRow dr)
-        {
-            Customer _customer = new Customer();
-            _customer.customer_ID = Convert.ToInt32(dr["customer_ID"]);
-            _customer.firstName = dr["firstName"].ToString();
-            _customer.lastName = dr["lastName"].ToString();
-            _customer.email = dr["email"].ToString();
-            _customer.phone = dr["phone"].ToString();
-            return _customer;
-        }
+
+        
     }
 }

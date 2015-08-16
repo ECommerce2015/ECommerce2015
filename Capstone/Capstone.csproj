@@ -128,15 +128,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AddToCartController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\AddToCart.cs" />
     <Compile Include="Models\Category.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -209,6 +213,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CustomerLogin.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HashKey.cs" />
     <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\OrderStatus.cs" />
@@ -234,11 +239,32 @@
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\RegisteredUser.cs" />
     <Compile Include="Models\Services.cs" />
+    <Compile Include="Models\State.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>State.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\State.cs">
+      <DependentUpon>State.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\State.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>State.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\State1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>State.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-rtl.min.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\easy-responsive-tabs.css" />
     <Content Include="Content\global.css" />
+    <Content Include="Content\morris.css" />
     <Content Include="Content\slider.css" />
     <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
@@ -262,23 +288,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Category.edmx</DependentUpon>
       <LastGenOutput>Category1.cs</LastGenOutput>
-    </Content>
-    <EntityDeploy Include="Models\Customer.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Customer.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Customer.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Customer.edmx</DependentUpon>
-      <LastGenOutput>Customer.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Customer.edmx.diagram">
-      <DependentUpon>Customer.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Customer.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Customer.edmx</DependentUpon>
-      <LastGenOutput>Customer1.cs</LastGenOutput>
     </Content>
     <EntityDeploy Include="Models\CustomerAddress.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -331,14 +340,58 @@
       <DependentUpon>Product.edmx</DependentUpon>
       <LastGenOutput>Product1.cs</LastGenOutput>
     </Content>
+    <EntityDeploy Include="Models\Customer.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Customer.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Customer.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Customer.edmx</DependentUpon>
+      <LastGenOutput>Customer.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Customer.edmx.diagram">
+      <DependentUpon>Customer.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Customer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Customer.edmx</DependentUpon>
+      <LastGenOutput>Customer1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\State.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>State.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\State.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>State.edmx</DependentUpon>
+      <LastGenOutput>State.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\State.edmx.diagram">
+      <DependentUpon>State.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\State.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>State.edmx</DependentUpon>
+      <LastGenOutput>State1.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\excanvas.min.js" />
+    <Content Include="Scripts\flot-data.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\jquery.accordion.js" />
     <Content Include="Scripts\jquery.easing.js" />
+    <Content Include="Scripts\jquery.flot.js" />
+    <Content Include="Scripts\jquery.flot.pie.js" />
+    <Content Include="Scripts\jquery.flot.resize.js" />
+    <Content Include="Scripts\jquery.flot.tooltip.min.js" />
     <Content Include="Scripts\layout.js" />
+    <Content Include="Scripts\morris-data.js" />
+    <Content Include="Scripts\morris.js" />
+    <Content Include="Scripts\morris.min.js" />
     <Content Include="Scripts\move-top.js" />
+    <Content Include="Scripts\raphael.min.js" />
     <Content Include="Scripts\registerForm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -363,6 +416,16 @@
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Product\Index.cshtml" />
+    <Content Include="Views\Shared\Product\Details.cshtml" />
+    <Content Include="Views\Shared\Product\Create.cshtml" />
+    <Content Include="Views\Shared\Product\Edit.cshtml" />
+    <Content Include="Views\Shared\Product\Delete.cshtml" />
+    <Content Include="Views\Shared\Product\Products.cshtml" />
+    <Content Include="Views\Registration\LoginRegister.cshtml" />
+    <Content Include="Views\Shared\_LayoutDashBoard.cshtml" />
+    <Content Include="Views\Admin\HomeDashBoard.cshtml" />
+    <Content Include="Views\Registration\HomeDashBoard.cshtml" />
     <Content Include="Views\Register\LoginRegister.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
@@ -376,6 +439,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AddToCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
