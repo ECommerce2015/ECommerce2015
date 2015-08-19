@@ -20,6 +20,7 @@ namespace Capstone
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      "~/Scripts/bootstrap.min.js",
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
@@ -37,8 +38,10 @@ namespace Capstone
                     "~/Content/sb-admin-rtl.css"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
+                    "~/Content/bootstrap.css",
                     "~/Content/bootstrap.min.css",
-                    "~/Content/bootstrap-rtl.mins.css"));
+                    "~/Content/bootstrap-rtl.min.css",
+                    "~/Content/bootstrap-rtl.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/javascript").Include(
                        "~/Scripts/easing.js",
@@ -64,7 +67,11 @@ namespace Capstone
                 "~/Scripts/morris.js",
                 "~/Scripts/morris.mins.js",
                 "~/Scripts/morris-data.js",
-                "~/Scripts/raphael.mins.js"));            
+                "~/Scripts/raphael.mins.js",
+                "~/Scripts/raphaeljs"));
+            bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
+                "~/font-awesome/css/font-awesome.css",
+                "~/font-awesome/css/font-awesome.min.css"));
         }
     }
 }

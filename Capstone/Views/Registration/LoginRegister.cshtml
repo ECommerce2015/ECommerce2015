@@ -6,13 +6,14 @@
             <p>Sign in with the form below.</p>
             @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { id = "loginForm" }))
             {
-                <input name="#" type="text" value="Username" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}">
-                <input name="#" type="password" value="Password" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                <input name="email" type="text" value="Username" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}">
+                <input name="password" type="password" value="Password" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                <div class="buttons">
+                    <button class="grey">Sign In</button>
+                </div>
             }
             <p class="note">If you forgot your passoword just enter your email and click <a href="#">here</a></p>
-            <div class="buttons">
-                <button class="grey">Sign In</button>
-            </div>
+            
         </div>
         <div class="register_account">
             <h3>Register New Account</h3>
@@ -32,7 +33,7 @@
                                     <input type="text" name="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}">
                                 </div>
                                 <div>
-                                    <input type="text" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                                    <input type="password" name="password" class="field" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
                                 </div>
                             </td>
                             <td>
