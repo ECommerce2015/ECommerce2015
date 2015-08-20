@@ -42,6 +42,7 @@
                                                <th>Name</th>
                                                <th>QTY</th>
                                                <th>Price</th>
+                                               <th>Sub Total</th>
                                            </tr>
                                            @foreach (Item item in (List<Item>)Session["cart"])
                                            {
@@ -50,6 +51,7 @@
                                                     <td>@item.Pr.name</td>
                                                     <td>@item.Quantity</td>
                                                     <td>@item.Pr.price</td>
+                                                    <td>@(item.Pr.price * item.Quantity)</td>
                                                 </tr>
                                            }
                                        </table>

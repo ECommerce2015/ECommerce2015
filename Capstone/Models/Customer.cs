@@ -14,21 +14,29 @@ namespace Capstone.Models
     using System.Security.Cryptography;
     using System.Web.Security;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
     
     public partial class Customer
     {
         public int customer_ID { get; set; }
         [Required]
-        [StringLength(30)]
+        [DataType(DataType.Text)]
+        [StringLength(30, ErrorMessage = "{0}: 30 is the limit")]
         public string firstName { get; set; }
         [Required]
-        [StringLength(30)]
+        [DataType(DataType.Text)]
+        [StringLength(30, ErrorMessage = "{0}: 30 is the limit")]
         public string lastName { get; set; }
-        [Required]
-        [StringLength(30)]
+        [Required(ErrorMessage = "{0} required")]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
+        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*",ErrorMessage = "Invalid email")]
+        [Remote("CheckEmail", "Registration", ErrorMessage = "Already in use")]
+        [StringLength(30, ErrorMessage = "{0}: 30 is the limit")]
         public string email { get; set; }
         [Required]
-        [StringLength(10)]
+        [DataType(DataType.PhoneNumber)]
+        [StringLength(10, ErrorMessage = "{0}: 10 is the limit")]
         public string phone { get; set; }
 
         
