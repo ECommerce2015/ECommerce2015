@@ -3,6 +3,7 @@
 }
 @using Capstone.Models;
 
+
 <div class="main">
     <div class="content">
         <div class="content_top">
@@ -70,7 +71,7 @@
                                     <li><a href="#"><img src="images/twitter.png" alt="" /></a></li>
                                 </ul>
                             </div>
-                            <div class="button"><span><a href="#">Add to Cart</a></span></div>
+                            <div class="button"><h4>@Html.ActionLink("Add To Cart", "OrderNow", "ShoppingCart", new { product_id = ViewBag.product_ID, category_id = ViewBag.category_ID }, null)</h4></div>
                             <div class="clear"></div>
                         </div>
                         <div class="wish-list">

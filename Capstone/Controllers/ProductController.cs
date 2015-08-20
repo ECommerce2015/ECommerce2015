@@ -153,6 +153,8 @@ namespace Capstone.Controllers
                     ViewBag.productName = product[0].name;
                     ViewBag.productStarus = product[0].productStatus_ID;
                     ViewBag.productDescription = product[0].description;
+                    ViewBag.product_ID = product[0].product_ID;
+                    ViewBag.category_ID = product[0].category_ID;
                     int category_ID = product[0].category_ID;
                 }
             }
