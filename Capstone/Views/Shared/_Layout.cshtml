@@ -19,7 +19,7 @@
                     <ul>
                         <li>@Html.ActionLink("Login/Register", "Index", "Registration")</li>
                         <li><a href="#">Delivery</a></li>
-                        <li><a href="#">Checkout</a></li>
+                        <li>@Html.ActionLink("Checkout", "Checkout", "Checkout")</li>
                         <li><a href="#">My Account</a></li>
                     </ul>
                 </div>
@@ -39,17 +39,20 @@
                                    <li class="dropdown">
                                        <table>
                                            <tr>
+                                               <th>Option</th>
                                                <th>Name</th>
-                                               <th>QTY</th>
                                                <th>Price</th>
+                                               <th>QTY</th>                                             
+                                               <th>Sub Total</th>
                                            </tr>
                                            @foreach (Item item in (List<Item>)Session["cart"])
                                            {
                                                 <tr>
-
+                                                    <td>@Html.ActionLink("Delete", "Delete", "ShoppingCart", new { product_id = item.Pr.product_ID, category_id = item.Pr.category_ID }, null)</td>
                                                     <td>@item.Pr.name</td>
-                                                    <td>@item.Quantity</td>
                                                     <td>@item.Pr.price</td>
+                                                    <td>@item.Quantity</td>
+                                                    <td>@(item.Pr.price * item.Quantity)</td>
                                                 </tr>
                                            }
                                        </table>

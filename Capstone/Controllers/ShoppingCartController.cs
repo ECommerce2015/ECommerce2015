@@ -39,20 +39,28 @@ namespace Capstone.Controllers
             {
                 List<Item> cart = (List<Item>)Session["cart"];
                 int index = isExisting(product_id);
-                
                 if (index == -1)
-                {
+                
                     cart.Add(new Item(pe.Products.Find(product_id), 1));
-                }
+                
                 else 
-                {
+                
                     cart[index].Quantity++;
-                    cart[index].Pr.price = cart[index].Price * cart[index].Quantity;
+                   // cart[index].Pr.price = cart[index].Price * cart[index].Quantity;
                   
-                }
                 Session["cart"] = cart;
             }
             return RedirectToAction("Products", "Product", new { category_ID = category_id });
         }
+
+        public ActionResult Delete(int product_id, int category_id) 
+        {
+            int index = isExisting(product_id);
+            List<Item> cart = (List<Item>)Session["cart"];
+            cart.RemoveAt(index);
+            Session["cart"] = cart;
+            return RedirectToAction("Products", "Product", new { category_ID = category_id });
+        }
+
     }
 }

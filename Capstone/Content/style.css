@@ -130,7 +130,7 @@ body {
 .wrapper-dropdown-2 .dropdown {
     position: absolute;
     top: 100%;
-    width:100%;
+    width:120%;
     right: 0px;
     z-index:1;
     background:#EEE;
@@ -156,13 +156,13 @@ body {
     transition: all 0.3s ease-out;
 }
 
-.wrapper-dropdown-2 .dropdown li table{
-  
+.wrapper-dropdown-2 .dropdown li table th{
+ text-decoration:underline;
 }
 
 .wrapper-dropdown-2 .dropdown li table td{
    
-   padding:8px 15px;
+   padding:8px 20px;
 }
 .wrapper-dropdown-2 .dropdown li:hover a {
     color:red;
@@ -176,6 +176,13 @@ body {
     pointer-events: auto;
 }
    /**** End Cart ****/
+
+
+#Checkout {
+    border:2px solid red;
+}
+
+
 .header_bottom {
 	background: #383838;
 	border-radius: 6px;
@@ -1849,3 +1856,12 @@ p.note{
 		width:93%;
 	}
 }
+
+
+
+
+
+
+
+
+
