@@ -42,7 +42,10 @@
                                                <th>Option</th>
                                                <th>Name</th>
                                                <th>Price</th>
+<<<<<<< HEAD
                                                <th>QTY</th>                                             
+=======
+>>>>>>> f318ccb6c9c643b704e9f98864555ad6a1065a60
                                                <th>Sub Total</th>
                                            </tr>
                                            @foreach (Item item in (List<Item>)Session["cart"])
@@ -51,7 +54,10 @@
                                                     <td>@Html.ActionLink("Delete", "Delete", "ShoppingCart", new { product_id = item.Pr.product_ID, category_id = item.Pr.category_ID }, null)</td>
                                                     <td>@item.Pr.name</td>
                                                     <td>@item.Pr.price</td>
+<<<<<<< HEAD
                                                     <td>@item.Quantity</td>
+=======
+>>>>>>> f318ccb6c9c643b704e9f98864555ad6a1065a60
                                                     <td>@(item.Pr.price * item.Quantity)</td>
                                                 </tr>
                                            }
