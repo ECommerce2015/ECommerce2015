@@ -179,8 +179,42 @@ body {
 
 
 #Checkout {
-    border:2px solid red;
+    box-shadow: 2px 2px 5px #888888;
+    margin: 40px auto;
 }
+
+
+#Checkout table { 
+color: #333;
+font-family: Helvetica, Arial, sans-serif;
+width: 100%; 
+border-collapse: collapse; border-spacing: 0; 
+}
+
+#Checkout td, th { 
+border: 1px solid transparent; /* No more visible border */
+height: 30px; 
+transition: all 0.3s;  /* Simple transition for hover effect */
+}
+
+#Checkout th {
+background: #757575;  /* Darken header a bit */
+font-weight: bold;
+color:white;
+height:40px;
+padding-top:20px;
+}
+
+#Checkout td {
+text-align: center;
+padding-top:15px;
+}
+
+#Checkout tr:hover 
+{
+     background-color: #eee; color: #000; 
+} /* Hover cell effect! */
+
 
 
 .header_bottom {

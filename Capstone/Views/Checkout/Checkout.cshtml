@@ -4,27 +4,37 @@
 }
 @using Capstone.Models
 
-<h2>Checkout</h2>
+<div class="content">
+    <div class="content_top">
+        <div class="heading">
+            <h3>Checkout</h3>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="Checkout">
+        @if (Session["cart"] != null)
+        {
+            <table>
+                <tr>
+                    <th>Option</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>QTY</th>
+                    <th>Sub Total</th>
+                </tr>
 
-           
-                    <div id="Checkout">
-                        <table>
-                            <tr>
-                                <th>Option</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>QTY</th>
-                                <th>Sub Total</th>
-                            </tr>
-                            @foreach (Item item in (List<Item>)Session["cart"])
-                            {
-                                <tr>
-                                    <td>@Html.ActionLink("Delete", "Delete", "ShoppingCart", new { product_id = item.Pr.product_ID, category_id = item.Pr.category_ID }, null)</td>
-                                    <td>@item.Pr.name</td>
-                                    <td>@item.Pr.price</td>
-                                    <td>@item.Quantity</td>
-                                    <td>@(item.Pr.price * item.Quantity)</td>
-                                </tr>
-                            }
-                        </table>
-                    </div>
+                @foreach (Item item in (List<Item>)Session["cart"])
+                {
+                    <tr>
+                        <td>@Html.ActionLink("Delete", "Delete", "Checkout", new { product_id = item.Pr.product_ID, category_id = item.Pr.category_ID }, null)</td>
+                        <td>@item.Pr.name</td>
+                        <td>@item.Pr.price</td>
+                        <td>@item.Quantity</td>
+                        <td>@(item.Pr.price * item.Quantity)</td>
+                    </tr>
+                }
+
+            </table>
+        }
+    </div>
+</div>
