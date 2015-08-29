@@ -377,7 +377,7 @@ padding-top:15px;
 .grid_1_of_4 {
 	display: block;
 	float: left;
-	margin: 1% 0 1% 1.6%;
+	margin: 10px 15px 10px -1px ;
 	box-shadow: 0px 0px 3px rgb(150, 150, 150);
 	-webkit-box-shadow: 0px 0px 3px rgb(150, 150, 150);
 	-moz-box-shadow: 0px 0px 3px rgb(150, 150, 150);
@@ -443,6 +443,29 @@ padding-top:15px;
 	transition: all 0.5s ease-in-out;
 }
 .add-cart h4 a:hover{
+	  text-shadow: 0px 0px 1px #000;
+	  background:#292929;
+}
+
+.checkout{
+	float:right;
+	display: inline-block;
+}
+.checkout h4 a{
+	font-size:0.9em;
+	display: block;
+	padding:10px 15px;
+	font-family: 'ambleregular';
+	background:#CD1F25;
+	color: #FFF;
+	text-decoration: none;
+	outline: 0;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.checkout h4 a:hover{
 	  text-shadow: 0px 0px 1px #000;
 	  background:#292929;
 }
