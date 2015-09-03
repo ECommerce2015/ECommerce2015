@@ -39,9 +39,7 @@ namespace Capstone
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                     "~/Content/bootstrap.css",
-                    "~/Content/bootstrap.min.css",
-                    "~/Content/bootstrap-rtl.min.css",
-                    "~/Content/bootstrap-rtl.css"));
+                    "~/Content/bootstrap.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/javascript").Include(
                        "~/Scripts/easing.js",

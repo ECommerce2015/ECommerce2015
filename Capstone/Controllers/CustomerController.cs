@@ -23,6 +23,10 @@ namespace Capstone.Controllers
         {
             return View();
         }
+        public ActionResult Billing()
+        {
+            return View();
+        }
         public ActionResult Orders() 
         {
             return View();

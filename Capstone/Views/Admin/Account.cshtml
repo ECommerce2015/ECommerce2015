@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Account";
+    Layout = "~/Views/Shared/_AdminLayoutDashBoard.cshtml";
+}
+
+<h2>Account</h2>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <h1>Sign Up</h1>
+        <div class="form-group">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputUsername">Username:</label>
+                    <div class="col-xs-9">
+                        <input type="text" name="Username" class="form-control" id="inputUsername" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputPassword">Password:</label>
+                    <div class="col-xs-9">
+                        <input type="text" name="password" class="form-control" id="inputpassword" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputAttemps">Attempts:</label>
+                    <div class="col-xs-9">
+                        <input type="text" name="attempts" class="form-control" id="inputattemps" placeholder="Attempts">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputEmail">Email:</label>
+                    <div class="col-xs-9">
+                        <input type="email" name="email" class="form-control" id="inputemail" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputPermission">Permission:</label>
+                    <div class="col-xs-9">
+                        <input type="text" name="permissions" class="form-control" id="inputpermissions" placeholder="Permissions">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-xs-offset-3 col-xs-9">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <input type="reset" class="btn btn-default" value="Reset">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
