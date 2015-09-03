@@ -15,6 +15,17 @@ namespace Capstone.Controllers
         {
             return View();
         }
-
+        public ActionResult Account()
+        {
+            return View();
+        }
+        public ActionResult Address() 
+        {
+            return View();
+        }
+        public ActionResult Orders() 
+        {
+            return View();
+        }
     }
 }

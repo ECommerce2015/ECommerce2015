@@ -134,6 +134,42 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Models\AdminLogin.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminLogin.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminLogin.cs">
+      <DependentUpon>AdminLogin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminLogin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminLogin.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminLogin1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminLogin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerBilling.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerBilling.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerBilling.cs">
+      <DependentUpon>CustomerBilling.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerBilling.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerBilling.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerBilling1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerBilling.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Item.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
@@ -141,8 +177,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\AddToCart.cs" />
     <Compile Include="Models\Category.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -216,9 +250,42 @@
       <DependentUpon>CustomerLogin.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HashKey.cs" />
-    <Compile Include="Models\OrderDetails.cs" />
-    <Compile Include="Models\Orders.cs" />
-    <Compile Include="Models\OrderStatus.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>Orders.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetails.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDetails.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetails.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDetails.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDetails.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatu.cs">
+      <DependentUpon>OrderDetails.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -237,10 +304,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Product.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductStatus.cs" />
-    <Compile Include="Models\Register.cs" />
-    <Compile Include="Models\RegisteredUser.cs" />
-    <Compile Include="Models\Services.cs" />
+    <Compile Include="Models\ProductStatu.cs">
+      <DependentUpon>ProductStatus.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductStatus.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductStatus.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductStatus.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductStatus.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductStatus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductStatus.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\State.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -413,6 +494,91 @@
     <Content Include="font-awesome\scss\_spinning.scss" />
     <Content Include="font-awesome\scss\_stacked.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
+    <EntityDeploy Include="Models\Orders.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Orders.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Orders.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Orders.edmx</DependentUpon>
+      <LastGenOutput>Orders.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Orders.edmx.diagram">
+      <DependentUpon>Orders.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Orders.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Orders.edmx</DependentUpon>
+      <LastGenOutput>Orders.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\AdminLogin.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AdminLogin.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AdminLogin.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdminLogin.edmx</DependentUpon>
+      <LastGenOutput>AdminLogin.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AdminLogin.edmx.diagram">
+      <DependentUpon>AdminLogin.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\AdminLogin.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdminLogin.edmx</DependentUpon>
+      <LastGenOutput>AdminLogin1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\CustomerBilling.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CustomerBilling.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CustomerBilling.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomerBilling.edmx</DependentUpon>
+      <LastGenOutput>CustomerBilling.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CustomerBilling.edmx.diagram">
+      <DependentUpon>CustomerBilling.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\CustomerBilling.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomerBilling.edmx</DependentUpon>
+      <LastGenOutput>CustomerBilling1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\OrderDetails.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OrderDetails.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\OrderDetails.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderDetails.edmx</DependentUpon>
+      <LastGenOutput>OrderDetails.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\OrderDetails.edmx.diagram">
+      <DependentUpon>OrderDetails.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\OrderDetails.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderDetails.edmx</DependentUpon>
+      <LastGenOutput>OrderDetails.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\ProductStatus.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductStatus.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ProductStatus.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductStatus.edmx</DependentUpon>
+      <LastGenOutput>ProductStatus.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProductStatus.edmx.diagram">
+      <DependentUpon>ProductStatus.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ProductStatus.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductStatus.edmx</DependentUpon>
+      <LastGenOutput>ProductStatus.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\excanvas.min.js" />
     <Content Include="Scripts\flot-data.js" />
@@ -477,6 +643,9 @@
     <Content Include="Views\ShoppingCart\Cart.cshtml" />
     <Content Include="Views\Checkout\Checkout.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Address.cshtml" />
+    <Content Include="Views\Customer\Orders.cshtml" />
+    <Content Include="Views\Customer\Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
