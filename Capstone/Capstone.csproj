@@ -322,6 +322,60 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductStatus.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Service.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Services.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Services.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Services.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingAddress.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingAddress.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingAddress.cs">
+      <DependentUpon>ShippingAddress.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingAddress.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingAddress.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingAddress1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingAddress.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingMethod.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingMethod.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingMethod.cs">
+      <DependentUpon>ShippingMethod.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingMethod.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingMethod.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingMethod1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingMethod.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\State.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -339,6 +393,24 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>State.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubCategory.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubCategory.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Subcategory.cs">
+      <DependentUpon>SubCategory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubCategory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubCategory.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubCategory1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubCategory.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -579,6 +651,74 @@
       <DependentUpon>ProductStatus.edmx</DependentUpon>
       <LastGenOutput>ProductStatus.cs</LastGenOutput>
     </Content>
+    <EntityDeploy Include="Models\Services.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Services.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Services.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Services.edmx</DependentUpon>
+      <LastGenOutput>Services.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Services.edmx.diagram">
+      <DependentUpon>Services.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Services.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Services.edmx</DependentUpon>
+      <LastGenOutput>Services.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\ShippingAddress.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ShippingAddress.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ShippingAddress.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ShippingAddress.edmx</DependentUpon>
+      <LastGenOutput>ShippingAddress.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ShippingAddress.edmx.diagram">
+      <DependentUpon>ShippingAddress.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ShippingAddress.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ShippingAddress.edmx</DependentUpon>
+      <LastGenOutput>ShippingAddress1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\ShippingMethod.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ShippingMethod.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ShippingMethod.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ShippingMethod.edmx</DependentUpon>
+      <LastGenOutput>ShippingMethod.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ShippingMethod.edmx.diagram">
+      <DependentUpon>ShippingMethod.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ShippingMethod.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ShippingMethod.edmx</DependentUpon>
+      <LastGenOutput>ShippingMethod1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\SubCategory.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SubCategory.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SubCategory.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SubCategory.edmx</DependentUpon>
+      <LastGenOutput>SubCategory.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\SubCategory.edmx.diagram">
+      <DependentUpon>SubCategory.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\SubCategory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SubCategory.edmx</DependentUpon>
+      <LastGenOutput>SubCategory1.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\excanvas.min.js" />
     <Content Include="Scripts\flot-data.js" />
@@ -630,7 +770,6 @@
     <Content Include="Views\Shared\Product\Products.cshtml" />
     <Content Include="Views\Registration\LoginRegister.cshtml" />
     <Content Include="Views\Shared\_LayoutDashBoard.cshtml" />
-    <Content Include="Views\Admin\HomeDashBoard.cshtml" />
     <Content Include="Views\Registration\HomeDashBoard.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
@@ -646,6 +785,14 @@
     <Content Include="Views\Customer\Address.cshtml" />
     <Content Include="Views\Customer\Orders.cshtml" />
     <Content Include="Views\Customer\Account.cshtml" />
+    <Content Include="Views\Customer\Billing.cshtml" />
+    <Content Include="Views\Shared\_AdminLayoutDashBoard.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Account.cshtml" />
+    <Content Include="Views\Admin\Category.cshtml" />
+    <Content Include="Views\Admin\Orders.cshtml" />
+    <Content Include="Views\Admin\Product.cshtml" />
+    <Content Include="Views\Admin\Services.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

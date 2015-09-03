@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_AdminLayoutDashBoard.cshtml";
+}
+
+<h2>Product</h2>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <h1>Sign Up</h1>
+        <div class="form-group">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputCategoryID">Category ID:</label>
+                    <div class="col-xs-9">
+                        <input type="text" name="category_ID" class="form-control" id="inputCategoryID" placeholder="Category ID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputProductstatus">Product Status:</label>
+                    <div class="col-xs-9">
+                        <input type="text" name="productStatus_ID" class="form-control" id="inputproductstatus" placeholder="Product Status">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputName">Name:</label>
+                    <div class="col-xs-9">
+                        <input type="text" name="name" class="form-control" id="inputname" placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputDescription">Description:</label>
+                    <div class="col-xs-9">
+                        <input type="text" name="description" class="form-control" id="inputdescription" placeholder="Description">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputPrice">Price:</label>
+                    <div class="col-xs-9">
+                        <input type="text" name="price" class="form-control" id="inputprice" placeholder="Price">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputQuantity">Quantity:</label>
+                    <div class="col-xs-9">
+                        <input type="text" name="quantity" class="form-control" id="inputquantity" placeholder="Quantity">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="inputImage">Image:</label>
+                    <div class="col-xs-9">
+                        <input type="file" name="image" class="form-control" id="inputimage" placeholder="Image">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-xs-offset-3 col-xs-9">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <input type="reset" class="btn btn-default" value="Reset">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

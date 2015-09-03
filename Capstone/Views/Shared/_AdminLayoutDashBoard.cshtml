@@ -138,19 +138,22 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        @Html.ActionLink("DashBoard", "Index", "Customer", new { @class = "fa fa-fw fa-dashboard" })
+                        @Html.ActionLink("DashBoard", "Index", "Admin", new { @class = "fa fa-fw fa-dashboard" })
                     </li>
                     <li>
-                        @Html.ActionLink("Account", "Account", "Customer", new { @class = "fa fa-fw fa-archive" })
+                        @Html.ActionLink("Account", "Account", "Admin", new { @class = "fa fa-fw fa-archive" })
                     </li>
                     <li>
-                        @Html.ActionLink("Address", "Address", "Customer", new { @class = "fa fa-fw fa-home" })
+                        @Html.ActionLink("Category", "Category", "Admin", new { @class = "fa fa-fw fa-archive" })
                     </li>
                     <li>
-                        @Html.ActionLink("Billing", "Billing", "Customer", new { @class = "fa fa-fw fa-credit-card" })
+                        @Html.ActionLink("Orders", "Orders", "Admin", new { @class = "fa fa-fw fa-archive" })
                     </li>
                     <li>
-                        @Html.ActionLink("Orders", "Orders", "Customer", new { @class = "fa fa-fw fa-table" })
+                        @Html.ActionLink("Product", "Product", "Admin", new { @class = "fa fa-fw fa-archive" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Services", "Services", "Admin", new { @class = "fa fa-fw fa-archive" })
                     </li>
                 </ul>
             </div>
