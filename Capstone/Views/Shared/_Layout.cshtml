@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Capstone</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @using Capstone.Models
 </head>
 <body>
     <div class="wrap">
@@ -16,9 +17,9 @@
                 </div>
                 <div class="account_desc">
                     <ul>
-                        <li><a href="~/Register/LoginRegister">Login/Register</a></li>
+                        <li>@Html.ActionLink("Login/Register", "Index", "Registration")</li>
                         <li><a href="#">Delivery</a></li>
-                        <li><a href="#">Checkout</a></li>
+                        <li>@Html.ActionLink("Checkout", "Checkout", "Checkout")</li>
                         <li><a href="#">My Account</a></li>
                     </ul>
                 </div>
@@ -29,16 +30,47 @@
                     <a href="~/Register/LoginRegister"><img src="~/images/logo.png" alt="" /></a>
                 </div>
                 <div class="cart">
-                    <p>
-                        Welcome to our Online Store! <span>Cart:</span><div id="dd" class="wrapper-dropdown-2">
-                            0 item(s) - $0.00
-                            <ul class="dropdown">
-                                <li>you have no items in your Shopping cart</li>
-                            </ul>
-                        </div>
+                    <p>                  
+                       Welcome to our Online Store! <span>Cart:</span>
+                       @if(Session["cart"]!=null)
+                        {
+                           <div id="dd" class="wrapper-dropdown-2">
+                               <ul class="dropdown">
+                                   <li class="dropdown">
+                                       <table>
+                                           <tr>
+                                               <th>Option</th>
+                                               <th>Name</th>
+                                               <th>Price</th>
+                                               <th>QTY</th>                                             
+                                               <th>Sub Total</th>
+                                           </tr>
+                                           @foreach (Item item in (List<Item>)Session["cart"])
+                                           {
+                                                <tr>
+                                                    <td>@Html.ActionLink("Delete", "Delete", "ShoppingCart", new { product_id = item.Pr.product_ID, category_id = item.Pr.category_ID }, null)</td>
+                                                    <td>@item.Pr.name</td>
+                                                    <td>@item.Pr.price</td>
+                                                    <td>@item.Quantity</td>
+                                                    <td>@(item.Pr.price * item.Quantity)</td>
+                                                </tr>
+                                           }
+                                       </table>
+                                    </li>
+                               </ul>
+                            </div>
+                        }
+                        else
+                        {
+                           <div id="dd" class="wrapper-dropdown-2">
+                              0 item(s) - $0.00
+                              <ul class="dropdown">
+                                  <li>you have no items in your Shopping cart</li>                               
+                              </ul>
+                           </div>
+                        }                       
                     </p>
-                </div>
-                
+                </div>                
                 <div class="clear"></div>
             </div>
             @*Nav bar*@

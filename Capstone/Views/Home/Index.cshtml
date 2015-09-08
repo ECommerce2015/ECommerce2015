@@ -1,21 +1,14 @@
-﻿@*header div with category list and carosuel*@
+﻿@using Capstone.Models;
+@*header div with category list and carosuel*@
 <div class="header_slide">
     <div class="header_bottom_left">
         <div class="categories">
             <ul>
                 <h3>Categories</h3>
-                <li><a href="#">Mobile Phones</a></li>
-                <li><a href="#">Desktop</a></li>
-                <li><a href="#">Laptop</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">Software</a></li>
-                <li><a href="#">Sports &amp; Fitness</a></li>
-                <li><a href="#">Footwear</a></li>
-                <li><a href="#">Jewellery</a></li>
-                <li><a href="#">Clothing</a></li>
-                <li><a href="#">Home Decor &amp; Kitchen</a></li>
-                <li><a href="#">Beauty &amp; Healthcare</a></li>
-                <li><a href="#">Toys, Kids &amp; Babies</a></li>
+                @foreach (Category categories in ViewBag.listCategories)
+                {
+                    <li>@Html.ActionLink(categories.name, "Products", new { category_ID = categories.category_ID }, null)</li>
+                }
             </ul>
         </div>
     </div>
@@ -25,7 +18,7 @@
                 <div id="mover">
                     <div id="slide-1" class="slide">
                         <div class="slider-img">
-                            <a href="~/Home/Preview"><img src="images/slide-1-image.png" alt="learn more" /></a>
+                            <a href="~/Home/Preview"><img src="~/images/slide-1-image.png" alt="learn more" /></a>
                         </div>
                         <div class="slider-text">
                             <h1>Clearance<br><span>SALE</span></h1>
@@ -53,7 +46,7 @@
                     </div>
                     <div class="slide">
                         <div class="slider-img">
-                            <a href="~/Home/Preview"><img src="images/slide-2-image.jpg" alt="learn more" /></a>
+                            <a href="~/Home/Preview"><img src="~/images/slide-2-image.jpg" alt="learn more" /></a>
                         </div>
                         <div class="slider-text">
                             <h1>Clearance<br><span>SALE</span></h1>
@@ -86,7 +79,7 @@
         </div>
         <div class="section group">
             <div class="grid_1_of_4 images_1_of_4">
-                <a href="~/Home/Preview"><img src="images/feature-pic1.jpg" alt="" /></a>
+                <a href="~/Home/Preview"><img src="~/images/feature-pic1.jpg" alt="" /></a>
                 <h2>Lorem Ipsum is simply </h2>
                 <div class="price-details">
                     <div class="price-number">
@@ -99,7 +92,7 @@
                 </div>
             </div>
             <div class="grid_1_of_4 images_1_of_4">
-                <a href="~/Home/Preview"><img src="images/feature-pic2.jpg" alt="" /></a>
+                <a href="~/Home/Preview"><img src="~/images/feature-pic2.jpg" alt="" /></a>
                 <h2>Lorem Ipsum is simply </h2>
                 <div class="price-details">
                     <div class="price-number">
@@ -113,7 +106,7 @@
 
             </div>
             <div class="grid_1_of_4 images_1_of_4">
-                <a href="~/Home/Preview"><img src="images/feature-pic3.jpg" alt="" /></a>
+                <a href="~/Home/Preview"><img src="~/images/feature-pic3.jpg" alt="" /></a>
                 <h2>Lorem Ipsum is simply </h2>
                 <div class="price-details">
                     <div class="price-number">
@@ -126,7 +119,7 @@
                 </div>
             </div>
             <div class="grid_1_of_4 images_1_of_4">
-                <a href="~/Home/Preview"><img src="images/feature-pic4.jpg" alt="" /></a>
+                <a href="~/Home/Preview"><img src="~/images/feature-pic4.jpg" alt="" /></a>
                 <h2>Lorem Ipsum is simply </h2>
                 <div class="price-details">
                     <div class="price-number">
@@ -150,7 +143,7 @@
         </div>
         <div class="section group">
             <div class="grid_1_of_4 images_1_of_4">
-                <a href="~/Home/Preview"><img src="images/new-pic1.jpg" alt="" /></a>
+                <a href="~/Home/Preview"><img src="~/images/new-pic1.jpg" alt="" /></a>
                 <h2>Lorem Ipsum is simply </h2>
                 <div class="price-details">
                     <div class="price-number">
@@ -163,7 +156,7 @@
                 </div>
             </div>
             <div class="grid_1_of_4 images_1_of_4">
-                <a href="~/Home/Preview"><img src="images/new-pic2.jpg" alt="" /></a>
+                <a href="~/Home/Preview"><img src="~/images/new-pic2.jpg" alt="" /></a>
                 <h2>Lorem Ipsum is simply </h2>
                 <div class="price-details">
                     <div class="price-number">
@@ -176,7 +169,7 @@
                 </div>
             </div>
             <div class="grid_1_of_4 images_1_of_4">
-                <a href="~/Home/Preview"><img src="images/new-pic4.jpg" alt="" /></a>
+                <a href="~/Home/Preview"><img src="~/images/new-pic4.jpg" alt="" /></a>
                 <h2>Lorem Ipsum is simply </h2>
                 <div class="price-details">
                     <div class="price-number">
@@ -189,7 +182,7 @@
                 </div>
             </div>
             <div class="grid_1_of_4 images_1_of_4">
-                <a href="~/Home/Preview"><img src="images/new-pic3.jpg" alt="" /></a>
+                <a href="~/Home/Preview"><img src="~/images/new-pic3.jpg" alt="" /></a>
                 <h2>Lorem Ipsum is simply </h2>
                 <div class="price-details">
                     <div class="price-number">

@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Capstone.Models;
 
 namespace Capstone.Controllers
 {
     public class HomeController : Controller
     {
+
+        private CategoryEntities category = new CategoryEntities(); 
+        [HttpGet]
+
         public ActionResult Index()
         {
+            ViewBag.listCategories = category.Categories.ToList();
             return View();
         }
 
@@ -42,6 +49,12 @@ namespace Capstone.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult Products(int category_ID)
+        {
+            //this will redirect to the Product controller Products method
+            //simply allows you to jump to another controller
+            return RedirectToAction("Products", "Product", new { category_ID = category_ID });
         }
     }
 }

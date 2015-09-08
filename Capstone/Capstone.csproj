@@ -44,6 +44,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -126,36 +128,302 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AddToCartController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Models\AdminLogin.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminLogin.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminLogin.cs">
+      <DependentUpon>AdminLogin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminLogin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminLogin.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminLogin1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminLogin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerBilling.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerBilling.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerBilling.cs">
+      <DependentUpon>CustomerBilling.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerBilling.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerBilling.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerBilling1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerBilling.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\AdminLogin.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\CustomerAddress.cs" />
-    <Compile Include="Models\CustomerBilling.cs" />
-    <Compile Include="Models\CustomerLogin.cs" />
-    <Compile Include="Models\OrderDetails.cs" />
-    <Compile Include="Models\Orders.cs" />
-    <Compile Include="Models\OrderStatus.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\ProductStatus.cs" />
-    <Compile Include="Models\Register.cs" />
-    <Compile Include="Models\RegisteredUser.cs" />
-    <Compile Include="Models\Services.cs" />
-    <Compile Include="Models\ShippingAddress.cs" />
-    <Compile Include="Models\ShippingMethod.cs" />
-    <Compile Include="Models\SubCategory.cs" />
+    <Compile Include="Models\Category.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Category.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>Category.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Category.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Category.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Customer.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>Customer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Customer.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Customer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerAddress.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerAddress.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerAddress.cs">
+      <DependentUpon>CustomerAddress.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerAddress.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerAddress.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerAddress1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerAddress.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerLogin.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerLogin.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerLogin.cs">
+      <DependentUpon>CustomerLogin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerLogin.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerLogin.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerLogin1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerLogin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HashKey.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>Orders.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetails.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDetails.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetails.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDetails.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDetails.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatu.cs">
+      <DependentUpon>OrderDetails.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Product.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>Product.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Product.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Product.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductStatu.cs">
+      <DependentUpon>ProductStatus.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductStatus.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductStatus.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductStatus.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductStatus.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductStatus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductStatus.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Service.cs">
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Services.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Services.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Services.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingAddress.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingAddress.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingAddress.cs">
+      <DependentUpon>ShippingAddress.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingAddress.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingAddress.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingAddress1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingAddress.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingMethod.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingMethod.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingMethod.cs">
+      <DependentUpon>ShippingMethod.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingMethod.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingMethod.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShippingMethod1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShippingMethod.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\State.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>State.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\State.cs">
+      <DependentUpon>State.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\State.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>State.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\State1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>State.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubCategory.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubCategory.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Subcategory.cs">
+      <DependentUpon>SubCategory.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubCategory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubCategory.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubCategory1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubCategory.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-rtl.css" />
+    <Content Include="Content\bootstrap-rtl.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\easy-responsive-tabs.css" />
     <Content Include="Content\global.css" />
+    <Content Include="Content\morris.css" />
+    <Content Include="Content\sb-admin-rtl.css" />
+    <Content Include="Content\sb-admin.css" />
     <Content Include="Content\slider.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -212,19 +480,318 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="font-awesome\css\font-awesome.css" />
+    <Content Include="font-awesome\css\font-awesome.min.css" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\easing.js" />
     <Content Include="Scripts\easyResponsiveTabs.js" />
+    <EntityDeploy Include="Models\Category.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Category.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Category.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Category.edmx</DependentUpon>
+      <LastGenOutput>Category.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Category.edmx.diagram">
+      <DependentUpon>Category.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Category.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Category.edmx</DependentUpon>
+      <LastGenOutput>Category1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\CustomerAddress.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CustomerAddress.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CustomerAddress.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomerAddress.edmx</DependentUpon>
+      <LastGenOutput>CustomerAddress.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CustomerAddress.edmx.diagram">
+      <DependentUpon>CustomerAddress.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\CustomerAddress.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomerAddress.edmx</DependentUpon>
+      <LastGenOutput>CustomerAddress1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\CustomerLogin.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CustomerLogin.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CustomerLogin.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomerLogin.edmx</DependentUpon>
+      <LastGenOutput>CustomerLogin.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CustomerLogin.edmx.diagram">
+      <DependentUpon>CustomerLogin.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\CustomerLogin.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomerLogin.edmx</DependentUpon>
+      <LastGenOutput>CustomerLogin1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\Product.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Product.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Product.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Product.edmx</DependentUpon>
+      <LastGenOutput>Product.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Product.edmx.diagram">
+      <DependentUpon>Product.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Product.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Product.edmx</DependentUpon>
+      <LastGenOutput>Product1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\Customer.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Customer.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Customer.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Customer.edmx</DependentUpon>
+      <LastGenOutput>Customer.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Customer.edmx.diagram">
+      <DependentUpon>Customer.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Customer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Customer.edmx</DependentUpon>
+      <LastGenOutput>Customer1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\State.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>State.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\State.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>State.edmx</DependentUpon>
+      <LastGenOutput>State.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\State.edmx.diagram">
+      <DependentUpon>State.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\State.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>State.edmx</DependentUpon>
+      <LastGenOutput>State1.cs</LastGenOutput>
+    </Content>
+    <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="font-awesome\less\bordered-pulled.less" />
+    <Content Include="font-awesome\less\core.less" />
+    <Content Include="font-awesome\less\fixed-width.less" />
+    <Content Include="font-awesome\less\font-awesome.less" />
+    <Content Include="font-awesome\less\icons.less" />
+    <Content Include="font-awesome\less\larger.less" />
+    <Content Include="font-awesome\less\list.less" />
+    <Content Include="font-awesome\less\mixins.less" />
+    <Content Include="font-awesome\less\path.less" />
+    <Content Include="font-awesome\less\rotated-flipped.less" />
+    <Content Include="font-awesome\less\spinning.less" />
+    <Content Include="font-awesome\less\stacked.less" />
+    <Content Include="font-awesome\less\variables.less" />
+    <Content Include="font-awesome\scss\font-awesome.scss" />
+    <Content Include="font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="font-awesome\scss\_core.scss" />
+    <Content Include="font-awesome\scss\_fixed-width.scss" />
+    <Content Include="font-awesome\scss\_icons.scss" />
+    <Content Include="font-awesome\scss\_larger.scss" />
+    <Content Include="font-awesome\scss\_list.scss" />
+    <Content Include="font-awesome\scss\_mixins.scss" />
+    <Content Include="font-awesome\scss\_path.scss" />
+    <Content Include="font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="font-awesome\scss\_spinning.scss" />
+    <Content Include="font-awesome\scss\_stacked.scss" />
+    <Content Include="font-awesome\scss\_variables.scss" />
+    <EntityDeploy Include="Models\Orders.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Orders.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Orders.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Orders.edmx</DependentUpon>
+      <LastGenOutput>Orders.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Orders.edmx.diagram">
+      <DependentUpon>Orders.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Orders.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Orders.edmx</DependentUpon>
+      <LastGenOutput>Orders.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\AdminLogin.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AdminLogin.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AdminLogin.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdminLogin.edmx</DependentUpon>
+      <LastGenOutput>AdminLogin.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AdminLogin.edmx.diagram">
+      <DependentUpon>AdminLogin.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\AdminLogin.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdminLogin.edmx</DependentUpon>
+      <LastGenOutput>AdminLogin1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\CustomerBilling.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CustomerBilling.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CustomerBilling.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomerBilling.edmx</DependentUpon>
+      <LastGenOutput>CustomerBilling.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CustomerBilling.edmx.diagram">
+      <DependentUpon>CustomerBilling.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\CustomerBilling.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CustomerBilling.edmx</DependentUpon>
+      <LastGenOutput>CustomerBilling1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\OrderDetails.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OrderDetails.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\OrderDetails.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderDetails.edmx</DependentUpon>
+      <LastGenOutput>OrderDetails.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\OrderDetails.edmx.diagram">
+      <DependentUpon>OrderDetails.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\OrderDetails.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderDetails.edmx</DependentUpon>
+      <LastGenOutput>OrderDetails.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\ProductStatus.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductStatus.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ProductStatus.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductStatus.edmx</DependentUpon>
+      <LastGenOutput>ProductStatus.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProductStatus.edmx.diagram">
+      <DependentUpon>ProductStatus.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ProductStatus.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductStatus.edmx</DependentUpon>
+      <LastGenOutput>ProductStatus.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\Services.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Services.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Services.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Services.edmx</DependentUpon>
+      <LastGenOutput>Services.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Services.edmx.diagram">
+      <DependentUpon>Services.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Services.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Services.edmx</DependentUpon>
+      <LastGenOutput>Services.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\ShippingAddress.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ShippingAddress.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ShippingAddress.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ShippingAddress.edmx</DependentUpon>
+      <LastGenOutput>ShippingAddress.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ShippingAddress.edmx.diagram">
+      <DependentUpon>ShippingAddress.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ShippingAddress.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ShippingAddress.edmx</DependentUpon>
+      <LastGenOutput>ShippingAddress1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\SubCategory.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SubCategory.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SubCategory.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SubCategory.edmx</DependentUpon>
+      <LastGenOutput>SubCategory.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\SubCategory.edmx.diagram">
+      <DependentUpon>SubCategory.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\SubCategory.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SubCategory.edmx</DependentUpon>
+      <LastGenOutput>SubCategory1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\ShippingMethod.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ShippingMethod.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ShippingMethod.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ShippingMethod.edmx</DependentUpon>
+      <LastGenOutput>ShippingMethod.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ShippingMethod.edmx.diagram">
+      <DependentUpon>ShippingMethod.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ShippingMethod.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ShippingMethod.edmx</DependentUpon>
+      <LastGenOutput>ShippingMethod1.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\excanvas.min.js" />
+    <Content Include="Scripts\flot-data.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\jquery.accordion.js" />
     <Content Include="Scripts\jquery.easing.js" />
+    <Content Include="Scripts\jquery.flot.js" />
+    <Content Include="Scripts\jquery.flot.pie.js" />
+    <Content Include="Scripts\jquery.flot.resize.js" />
+    <Content Include="Scripts\jquery.flot.tooltip.min.js" />
     <Content Include="Scripts\layout.js" />
+    <Content Include="Scripts\morris-data.js" />
+    <Content Include="Scripts\morris.js" />
+    <Content Include="Scripts\morris.min.js" />
     <Content Include="Scripts\move-top.js" />
+    <Content Include="Scripts\raphael.js" />
+    <Content Include="Scripts\raphael.min.js" />
     <Content Include="Scripts\registerForm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -247,19 +814,52 @@
     <Content Include="Views\Home\Delivery.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
-    <Content Include="Views\Home\Preview.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Register\LoginRegister.cshtml" />
+    <Content Include="Views\Shared\Product\Index.cshtml" />
+    <Content Include="Views\Shared\Product\Details.cshtml" />
+    <Content Include="Views\Shared\Product\Create.cshtml" />
+    <Content Include="Views\Shared\Product\Edit.cshtml" />
+    <Content Include="Views\Shared\Product\Delete.cshtml" />
+    <Content Include="Views\Shared\Product\Products.cshtml" />
+    <Content Include="Views\Registration\LoginRegister.cshtml" />
+    <Content Include="Views\Shared\_LayoutDashBoard.cshtml" />
+    <Content Include="Views\Registration\HomeDashBoard.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Product\Products.cshtml" />
+    <Content Include="Views\Product\ProductView.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Cart.cshtml" />
+    <Content Include="Views\Checkout\Checkout.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Address.cshtml" />
+    <Content Include="Views\Customer\Orders.cshtml" />
+    <Content Include="Views\Customer\Account.cshtml" />
+    <Content Include="Views\Customer\Billing.cshtml" />
+    <Content Include="Views\Shared\_AdminLayoutDashBoard.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Account.cshtml" />
+    <Content Include="Views\Admin\Category.cshtml" />
+    <Content Include="Views\Admin\Orders.cshtml" />
+    <Content Include="Views\Admin\Product.cshtml" />
+    <Content Include="Views\Admin\Services.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AddToCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
