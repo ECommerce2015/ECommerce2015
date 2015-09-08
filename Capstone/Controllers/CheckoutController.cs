@@ -11,14 +11,17 @@ namespace Capstone.Controllers
     {
         //
         // GET: /Checkout/
+        private ShippingMethodsEntities shippingMethod = new ShippingMethodsEntities(); 
 
         public ActionResult Index()
         {
+           
             return View();
         }
 
         public ActionResult Checkout()
         {
+            ViewBag.listShippingMethod = shippingMethod.ShippingMethods.ToList();
             return View();
         }
         private int isExisting(int product_id)

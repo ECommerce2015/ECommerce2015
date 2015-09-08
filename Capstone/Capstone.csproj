@@ -685,23 +685,6 @@
       <DependentUpon>ShippingAddress.edmx</DependentUpon>
       <LastGenOutput>ShippingAddress1.cs</LastGenOutput>
     </Content>
-    <EntityDeploy Include="Models\ShippingMethod.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ShippingMethod.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ShippingMethod.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ShippingMethod.edmx</DependentUpon>
-      <LastGenOutput>ShippingMethod.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ShippingMethod.edmx.diagram">
-      <DependentUpon>ShippingMethod.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\ShippingMethod.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ShippingMethod.edmx</DependentUpon>
-      <LastGenOutput>ShippingMethod1.cs</LastGenOutput>
-    </Content>
     <EntityDeploy Include="Models\SubCategory.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SubCategory.Designer.cs</LastGenOutput>
@@ -718,6 +701,23 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SubCategory.edmx</DependentUpon>
       <LastGenOutput>SubCategory1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\ShippingMethod.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ShippingMethod.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ShippingMethod.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ShippingMethod.edmx</DependentUpon>
+      <LastGenOutput>ShippingMethod.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ShippingMethod.edmx.diagram">
+      <DependentUpon>ShippingMethod.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ShippingMethod.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ShippingMethod.edmx</DependentUpon>
+      <LastGenOutput>ShippingMethod1.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\excanvas.min.js" />

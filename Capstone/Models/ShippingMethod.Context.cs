@@ -13,10 +13,10 @@ namespace Capstone.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ShippingMethodEntities : DbContext
+    public partial class ShippingMethodsEntities : DbContext
     {
-        public ShippingMethodEntities()
-            : base("name=ShippingMethodEntities")
+        public ShippingMethodsEntities()
+            : base("name=ShippingMethodsEntities")
         {
         }
     
