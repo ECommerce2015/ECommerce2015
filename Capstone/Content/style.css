@@ -212,7 +212,15 @@ padding-top:15px;
 #Checkout tr:hover 
 {
      background-color: #eee; color: #000; 
-} 
+}
+
+#total
+{
+    color:red; 
+    font-weight:bolder; 
+    margin-right:-200px;
+    float:left;
+}
 
 .content h3{
 	font-size: 22px;
