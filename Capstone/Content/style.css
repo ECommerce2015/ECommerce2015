@@ -1663,8 +1663,7 @@ p.note{
 		padding:15px 0 0 15px;		
 		width:68%;		
 	}
-<<<<<<< HEAD
-=======
+
 	.login_panel {
 		width:30%;
 		padding:10px;
@@ -1679,7 +1678,6 @@ p.note{
 		width:68%;
 	}
 
->>>>>>> 27e1dc9df42cca6e37e99c7f2dab50fe8641de54
 }
 @media only screen and (max-width: 800px) {
 	.wrap {
