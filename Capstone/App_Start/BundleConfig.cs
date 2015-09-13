@@ -34,8 +34,7 @@ namespace Capstone
                     "~/Content/morris.css"));
 
             bundles.Add(new StyleBundle("~/Content/sb-admin").Include(
-                    "~/Content/sb-admin.css",
-                    "~/Content/sb-admin-rtl.css"));
+                    "~/Content/sb-admin.css"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                     "~/Content/bootstrap.css",
