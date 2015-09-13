@@ -926,10 +926,9 @@ padding-top:15px;
 	margin-top: 15px;
 	line-height: 3em;
 }
-.span_3_of_2 .button {
+.button {
 	float: right;
-	margin-top: 1%;
-	line-height: 2em;
+	margin-top:1%;
 }
 .product-tags .button a {
 	font-size:1em;
