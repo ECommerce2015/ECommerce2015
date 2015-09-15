@@ -25,7 +25,13 @@
                     <input name="phone" type="text" value="phone" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Phone';}">
                     <input name="address" type="text" value="address" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}">
                     <input name="city" type="text" value="city" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'City';}">
-                    <input name="state" type="text" value="state" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'State';}">
+                    <select name="state" class="form-control" required>
+                        <option value="" selected="selected">- Select A State -</option>
+                        @foreach (var states in ViewBag.StatesList)
+                        {
+                            <option value="@states.StateID">@states.StateName</option>
+                        }
+                    </select>
                 }
             </div>
             <div class="shipping_method">

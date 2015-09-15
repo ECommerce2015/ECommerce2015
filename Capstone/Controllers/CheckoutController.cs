@@ -19,8 +19,10 @@ namespace Capstone.Controllers
             return View();
         }
 
+        StateEntities sEntity = new StateEntities();
         public ActionResult Checkout()
         {
+            ViewBag.StatesList = sEntity.States.ToList();
             ViewBag.listShippingMethod = shippingMethod.ShippingMethods.ToList();
             return View();
         }
