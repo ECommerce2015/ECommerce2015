@@ -139,8 +139,16 @@ namespace Capstone.Controllers
             }
             return View();
         }
+
+        
+        ProductEntities qEntity = new ProductEntities();
+
         public ActionResult ProductView(int product_ID) 
         {
+            ViewBag.ProductRow = qEntity.Products.Where(x => x.product_ID == product_ID).ToList();
+            ViewBag.quantity = ViewBag.ProductRow[0].quantity;
+            ViewBag.quantity++;
+
             using (ProductEntities context = new ProductEntities())
             {
                 Product productData = new Product();
