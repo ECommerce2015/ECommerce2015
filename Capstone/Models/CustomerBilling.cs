@@ -18,5 +18,6 @@ namespace Capstone.Models
         public int cardType { get; set; }
         public string cardNumber { get; set; }
         public System.DateTime expireDate { get; set; }
+        public int customer_ID { get; set; }
     }
 }

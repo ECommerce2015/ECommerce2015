@@ -13,18 +13,14 @@
         <div class="clear"></div>
     </div>
     <div class="main">
-        @using (Html.BeginForm("index", "Checkout", FormMethod.Post, new { id = "loginForm" }))
+        @using (Html.BeginForm("ProcessCheckout", "Checkout", FormMethod.Post, new { id = "loginForm" }))
         {
         <div class="content">
             <div class="billing_address">
                 <h3>Billing Address</h3>
-                <p>Sign in with the form below.</p>
-               
-                    <input name="firstName" type="text" value="firstName" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'First Name';}">
-                    <input name="lastName" type="text" value="lastName" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Last Name';}">
-                    <input name="email" type="text" value="email" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
-                    <input name="phone" type="text" value="phone" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Phone';}">
-                    <input name="address" type="text" value="address" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}">
+                <p>Please fill out form</p>
+
+                    <input name="address1" type="text" value="address" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}">
                     <input name="city" type="text" value="city" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'City';}">
                     <select  name="state" class="form-control" required>
                         <option value="" selected="selected">- Select A State -</option>
@@ -33,6 +29,7 @@
                             <option value="@states.StateID">@states.StateName</option>
                         }
                     </select>
+                    <input name="zipcode" type="text" value="zipcode" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Zip Code';}">
                 
             </div>
             <div class="shipping_method">
@@ -55,9 +52,9 @@
             <div class="payment_method">
                 <h3>Payment Method</h3>
                 <p>Enter card information below</p><br />
-                    <p>Visa:<input name="cardType" type="radio" value="cardType" class="field">
-                    Master Card:<input name="cardType" type="radio" value="cardType" class="field">
-                    American Express:<input name="cardType" type="radio" value="cardType" class="field"><br /><br />
+                    <p>Visa:<input name="cardType" type="radio" value="Visa" class="field">
+                    Master Card:<input name="cardType" type="radio" value="MasterCard" class="field">
+                    American Express:<input name="cardType" type="radio" value="AmericanExpress" class="field"><br /><br />
                     <input name="cardNumber" type="text" value="CardNumber" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Card Number';}">
                     <input name="expire Number" type="text" value="expireDate" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Expire Date';}"></p>
                 

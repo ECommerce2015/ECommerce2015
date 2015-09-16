@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Capstone.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Capstone.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CustomerBilling">
           <Key>
             <PropertyRef Name="customerBilling_ID" />
@@ -13,12 +13,12 @@
           <Property Name="cardType" Type="int" Nullable="false" />
           <Property Name="cardNumber" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="expireDate" Type="date" Nullable="false" />
+          <Property Name="customer_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="CapstoneStoreContainer">
           <EntitySet Name="CustomerBilling" EntityType="Self.CustomerBilling" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Capstone" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -30,6 +30,7 @@
           <Property Name="cardType" Type="Int32" Nullable="false" />
           <Property Name="cardNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="expireDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="customer_ID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityContainer Name="CustomerBillingEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CustomerBillings" EntityType="Self.CustomerBilling" />
@@ -43,6 +44,7 @@
           <EntitySetMapping Name="CustomerBillings">
             <EntityTypeMapping TypeName="Capstone.CustomerBilling">
               <MappingFragment StoreEntitySet="CustomerBilling">
+                <ScalarProperty Name="customer_ID" ColumnName="customer_ID" />
                 <ScalarProperty Name="customerBilling_ID" ColumnName="customerBilling_ID" />
                 <ScalarProperty Name="cardType" ColumnName="cardType" />
                 <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />

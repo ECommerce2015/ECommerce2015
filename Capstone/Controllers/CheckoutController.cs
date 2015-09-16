@@ -44,5 +44,34 @@ namespace Capstone.Controllers
             Session["cart"] = cart;
             return RedirectToAction("Checkout", "Checkout", new { category_ID = category_id });
         }
+        public ActionResult ProcessCheckout(int customerID, ShippingAddress shippingaddress,ShippingMethod shippingMethod,CustomerBilling customerBilling) 
+        {
+            try
+            {
+                using (ShippingAddressEntities shippingEntities = new ShippingAddressEntities()) 
+                {
+                    CustomerAddressEntities cAddentity = new CustomerAddressEntities();
+                    List<CustomerAddress> customeraddress = cAddentity.CustomerAddresses.Where(x => x.customerAddress_ID == customerID).ToList();
+                    shippingaddress.customer_ID = customeraddress[0].customerAddress_ID;
+                    shippingaddress.CustomerAddress_ID = customeraddress[0].customerAddress_ID;
+                    shippingaddress.shippingMethod_ID = shippingMethod.shippingMethod_ID;
+                    shippingEntities.ShippingAddresses.Add(shippingaddress);
+                    shippingEntities.SaveChanges();
+                }
+                using(CustomerBillingEntities customerBillingentity = new CustomerBillingEntities())
+                {
+                    customerBilling.customer_ID = customerID;
+                    customerBillingentity.CustomerBillings.Add(customerBilling);
+                    customerBillingentity.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                return View(ex);
+            }
+            //possibly write an if statement if they are not logged in make them login 
+            //else go to the dashboard
+            return View();
+        }
     }
 }
