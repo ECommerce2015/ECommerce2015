@@ -15,7 +15,10 @@ namespace Capstone.Controllers
 
         public ActionResult Index()
         {
-           
+            if (Session["customerID"]==null) 
+            {
+                RedirectToAction("Index", "Registration");
+            }
             return View();
         }
 
