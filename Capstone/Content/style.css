@@ -228,7 +228,7 @@ padding-top:15px;
 	padding-bottom:.4em;
 }
 
-.billing_address{
+.shipping_address{
 	float:left;
 	width:27%;
 	margin-right:2%;
@@ -238,7 +238,7 @@ padding-top:15px;
     -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;
     height: auto;
 }
-.billing_address input[type="text"],.billing_address input[type="password"]{
+.shipping_address input[type="text"],.shipping_address input[type="password"]{
 	font-size:12px;
 	color:#B3B1B1;
 	padding:8px;
@@ -246,15 +246,15 @@ padding-top:15px;
 	margin:6px 0;
 	width:92%;
 }
-.billing_address form{
+.shipping_address form{
 	margin:15px 0;
 }
-.billing_address p{
+.shipping_address p{
 	font-size:12px;
 	color:#888;
 }
 		
-.billing_address form input[type="text"],.billing_address form select, .form-control{		
+.shipping_address form input[type="text"],.shipping_address form select, .form-control{		
 	font-size:12px;		
 	color:#B3B1B1;		
 	padding:8px;		
@@ -262,7 +262,7 @@ padding-top:15px;
 	margin:5px 0;		
 	width:97%;		
 }		
-.billing_address form select{		
+.shipping_address form select{		
 	width:360px;		
 	color:#666;		
 }
