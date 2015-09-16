@@ -61,7 +61,7 @@ namespace Capstone.Controllers
                         //inserting into customer login table
                         clEntity.CustomerLogins.Add(customerLogin);
                         clEntity.SaveChanges();
-                        viewChange = "HomeDashBoard";
+                        return RedirectToAction("Index", "Customer", new { customer_ID = customerLogin.customer_ID });
                     }
                 }
                 else 
