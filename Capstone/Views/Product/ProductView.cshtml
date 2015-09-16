@@ -32,18 +32,9 @@
                             <p>Price: <span>@ViewBag.productPrice</span></p>
                         </div>
                         <div class="available">
-                            <p>Available Options :</p>
+                            <p>Available Option :</p>
                             <ul>
-                                <li>
-                                   
-         
-                                </li>
-                                <li>
-                                    
-               
-                                </li>
-                                <li>
-                                    Quanity:
+                                <li>Quanity:
                                     <select name="quantity" class="form-control" required>
                                         <option value="" selected="selected">0</option>
                                         @for (var i = 1; i < ViewBag.quantity; i++)
@@ -62,9 +53,7 @@
                     </div>
                     <div class="product_desc">
                         <div id="horizontalTab">
-                            <ul class="resp-tabs-list">
-                                <li>Product Details</li>
-                            </ul>
+                            <h3>Product Details</h3>
                             <div class="clear"></div>
                             <div class="resp-tabs-container">
                                 <div class="product-desc">
