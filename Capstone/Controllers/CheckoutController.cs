@@ -15,16 +15,16 @@ namespace Capstone.Controllers
 
         public ActionResult Index()
         {
-            if (Session["customerID"]==null) 
-            {
-                RedirectToAction("Index", "Registration");
-            }
             return View();
         }
 
         StateEntities sEntity = new StateEntities();
         public ActionResult Checkout()
         {
+            if (Session["customerID"] == null)
+            {
+                return RedirectToAction("Index", "Registration");
+            }
             ViewBag.StatesList = sEntity.States.ToList();
             ViewBag.listShippingMethod = shippingMethod.ShippingMethods.ToList();
             return View();
@@ -47,17 +47,18 @@ namespace Capstone.Controllers
             Session["cart"] = cart;
             return RedirectToAction("Checkout", "Checkout", new { category_ID = category_id });
         }
-        public ActionResult ProcessCheckout(int customerID, ShippingAddress shippingaddress,ShippingMethod shippingMethod,CustomerBilling customerBilling) 
+        public ActionResult ProcessCheckout(ShippingAddress shippingaddress,ShippingMethod shippingMethod,CustomerBilling customerBilling, Order order, OrderDetail orderDetail, OrderStatu orderstatus) 
         {
+            int customerID = Convert.ToInt32(Session["customerID"]);
             try
             {
                 using (ShippingAddressEntities shippingEntities = new ShippingAddressEntities()) 
                 {
                     CustomerAddressEntities cAddentity = new CustomerAddressEntities();
+                    
                     List<CustomerAddress> customeraddress = cAddentity.CustomerAddresses.Where(x => x.customerAddress_ID == customerID).ToList();
-                    shippingaddress.customer_ID = customeraddress[0].customerAddress_ID;
+                    shippingaddress.customer_ID = customerID;
                     shippingaddress.CustomerAddress_ID = customeraddress[0].customerAddress_ID;
-                    shippingaddress.shippingMethod_ID = shippingMethod.shippingMethod_ID;
                     shippingEntities.ShippingAddresses.Add(shippingaddress);
                     shippingEntities.SaveChanges();
                 }
@@ -67,14 +68,34 @@ namespace Capstone.Controllers
                     customerBillingentity.CustomerBillings.Add(customerBilling);
                     customerBillingentity.SaveChanges();
                 }
+                //using (OrderDetailsEntities orderDetailsEntities = new OrderDetailsEntities())
+                //{
+                //    orderDetailsEntities.OrderDetails.Add(orderDetail);
+                //    orderDetailsEntities.SaveChanges();
+                //}
+                //using(OrderStatusEntities orderStatus = new OrderStatusEntities())
+                //{
+                //    orderStatus.OrderStatus.Add(orderstatus);
+                //    orderStatus.SaveChanges();
+                //}
+                //using(OrdersEntities ordersEntity = new OrdersEntities())
+                //{
+                //    order.customer_ID = customerID;
+                //    order.customerBilling_ID = customerBilling.customerBilling_ID;
+                //    order.shippingAddress_ID = shippingaddress.shippingAddress_ID;
+                //    order.shippingMethod_ID = shippingMethod.shippingMethod_ID;
+                //    order.customerBilling_ID = customerBilling.customerBilling_ID;
+                //    ordersEntity.Orders.Add(order);
+                //    ordersEntity.SaveChanges();
+                //} 
             }
             catch (Exception ex)
             {
-                return View(ex);
+                return View("Checkout");
             }
             //possibly write an if statement if they are not logged in make them login 
             //else go to the dashboard
-            return View();
+            return RedirectToAction("Index","Home");
         }
     }
 }

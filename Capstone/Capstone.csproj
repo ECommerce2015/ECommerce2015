@@ -253,6 +253,9 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>Orders.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderDetail.cs">
+      <DependentUpon>OrderDetails.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrderDetails.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -284,7 +287,22 @@
       <DependentUpon>Orders.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderStatu.cs">
-      <DependentUpon>OrderDetails.tt</DependentUpon>
+      <DependentUpon>OrderStatus.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatus.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderStatus.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatus.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderStatus.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderStatus.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.Context.cs">
       <AutoGen>True</AutoGen>
@@ -672,23 +690,6 @@
       <DependentUpon>CustomerBilling.edmx</DependentUpon>
       <LastGenOutput>CustomerBilling1.cs</LastGenOutput>
     </Content>
-    <EntityDeploy Include="Models\OrderDetails.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OrderDetails.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\OrderDetails.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OrderDetails.edmx</DependentUpon>
-      <LastGenOutput>OrderDetails.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\OrderDetails.edmx.diagram">
-      <DependentUpon>OrderDetails.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\OrderDetails.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OrderDetails.edmx</DependentUpon>
-      <LastGenOutput>OrderDetails.cs</LastGenOutput>
-    </Content>
     <EntityDeploy Include="Models\ProductStatus.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ProductStatus.Designer.cs</LastGenOutput>
@@ -773,6 +774,40 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ShippingMethod.edmx</DependentUpon>
       <LastGenOutput>ShippingMethod1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\OrderDetails.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OrderDetails.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\OrderDetails.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderDetails.edmx</DependentUpon>
+      <LastGenOutput>OrderDetails.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\OrderDetails.edmx.diagram">
+      <DependentUpon>OrderDetails.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\OrderDetails.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderDetails.edmx</DependentUpon>
+      <LastGenOutput>OrderDetails.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\OrderStatus.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OrderStatus.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\OrderStatus.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderStatus.edmx</DependentUpon>
+      <LastGenOutput>OrderStatus.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\OrderStatus.edmx.diagram">
+      <DependentUpon>OrderStatus.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\OrderStatus.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderStatus.edmx</DependentUpon>
+      <LastGenOutput>OrderStatus.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\excanvas.min.js" />

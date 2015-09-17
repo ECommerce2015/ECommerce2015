@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="aa7884125f6341599d955bd13b91202d" Name="Diagram1">
-        <EntityTypeShape EntityType="Capstone.OrderDetail" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="5a1304990ccd4573bc0e1e9707a6bd5a" Name="Diagram1">
+        <EntityTypeShape EntityType="Capstone.OrderStatu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

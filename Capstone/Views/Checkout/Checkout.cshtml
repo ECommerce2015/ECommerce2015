@@ -39,11 +39,8 @@
                     @foreach (ShippingMethod shipMethod in ViewBag.listShippingMethod)
                     {   
                         <table>
-                           <p> @shipMethod.type
                             <br />
-                            @Html.RadioButtonFor(m => shipMethod.shippingMethod_ID, shipMethod.type)
-                            @shipMethod.shippingCost
-                            </p>
+                               <input type="radio" name="shippingMethod_ID" value="@shipMethod.shippingMethod_ID">@shipMethod.type - @shipMethod.shippingCost
                         </table>
                     <br />                                      
                     }          
@@ -52,11 +49,12 @@
             <div class="payment_method">
                 <h3>Payment Method</h3>
                 <p>Enter card information below</p><br />
-                    <p>Visa:<input name="cardType" type="radio" value="Visa" class="field">
-                    Master Card:<input name="cardType" type="radio" value="MasterCard" class="field">
-                    American Express:<input name="cardType" type="radio" value="AmericanExpress" class="field"><br /><br />
+                    @{CustomerBilling customerBilling = new CustomerBilling();}
+                    <p>Visa:<input name="cardType" type="radio" value="{@customerBilling.cardType=1}" class="field">
+                    Master Card:<input name="cardType" type="radio" value="{@customerBilling.cardType=2}" class="field">
+                    American Express:<input name="cardType" type="radio" value="{@customerBilling.cardType=3}" class="field"><br /><br />
                     <input name="cardNumber" type="text" value="CardNumber" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Card Number';}">
-                    <input name="expire Number" type="text" value="expireDate" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Expire Date';}"></p>
+                    <input name="expireDate" type="text" value="expireDate" class="field" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Expire Date';}"></p>
                 
             </div>
             <div class="clear"></div>
@@ -84,7 +82,7 @@
                                     <td>@Html.ActionLink("Delete", "Delete", "Checkout", new { product_id = item.Pr.product_ID, category_id = item.Pr.category_ID }, null)</td>
                                     <td>@item.Pr.name</td>
                                     <td>@item.Pr.price</td>
-                                    <td>@item.Quantity</td>
+                                    <td name="quantity">@item.Quantity</td>
                                     <td>@(item.Pr.price * item.Quantity)</td>
                                     @{checkoutTotal += (item.Pr.price * item.Quantity);}
                                 </tr>
@@ -104,7 +102,7 @@
             <div class="clear"></div>
         </div>
         <div class="checkout">
-            <h4>@Html.ActionLink("Checkout", "ProcessCheckout", "Checkout")</h4>
+            <button>Checkout</button>
         </div>
          }
     </div>

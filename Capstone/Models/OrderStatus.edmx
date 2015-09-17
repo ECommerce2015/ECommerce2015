@@ -5,48 +5,45 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Capstone.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="OrderDetails">
+        <EntityType Name="OrderStatus">
           <Key>
-            <PropertyRef Name="orderDetails_ID" />
+            <PropertyRef Name="orderStatus_ID" />
           </Key>
-          <Property Name="orderDetails_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="product_ID" Type="int" Nullable="false" />
-          <Property Name="quantity" Type="int" Nullable="false" />
-          <Property Name="total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="orderStatus_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="statusCode" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityContainer Name="CapstoneStoreContainer">
-          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Capstone" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="OrderDetail">
+        <EntityType Name="OrderStatu">
           <Key>
-            <PropertyRef Name="orderDetails_ID" />
+            <PropertyRef Name="orderStatus_ID" />
           </Key>
-          <Property Name="orderDetails_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_ID" Type="Int32" Nullable="false" />
-          <Property Name="quantity" Type="Int32" Nullable="false" />
-          <Property Name="total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="orderStatus_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statusCode" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="OrderDetailsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+        <EntityContainer Name="OrderStatusEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatu" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CapstoneStoreContainer" CdmEntityContainer="OrderDetailsEntities">
-          <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="Capstone.OrderDetail">
-              <MappingFragment StoreEntitySet="OrderDetails">
-                <ScalarProperty Name="orderDetails_ID" ColumnName="orderDetails_ID" />
-                <ScalarProperty Name="product_ID" ColumnName="product_ID" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="total" ColumnName="total" />
+        <EntityContainerMapping StorageEntityContainer="CapstoneStoreContainer" CdmEntityContainer="OrderStatusEntities">
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="Capstone.OrderStatu">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="orderStatus_ID" ColumnName="orderStatus_ID" />
+                <ScalarProperty Name="statusCode" ColumnName="statusCode" />
+                <ScalarProperty Name="description" ColumnName="description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
