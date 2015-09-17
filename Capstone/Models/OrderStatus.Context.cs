@@ -13,10 +13,10 @@ namespace Capstone.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OrderDetailsEntities : DbContext
+    public partial class OrderStatusEntities : DbContext
     {
-        public OrderDetailsEntities()
-            : base("name=OrderDetailsEntities")
+        public OrderStatusEntities()
+            : base("name=OrderStatusEntities")
         {
         }
     
@@ -25,6 +25,6 @@ namespace Capstone.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<OrderStatu> OrderStatus { get; set; }
     }
 }

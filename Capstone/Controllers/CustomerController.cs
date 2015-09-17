@@ -15,7 +15,7 @@ namespace Capstone.Controllers
         
         CustomerBilling cbEntities = new CustomerBilling();
         OrdersEntities oEntities = new OrdersEntities();
-        OrderDeatilsEntities odEntities = new OrderDeatilsEntities();
+        OrderDetailsEntities odEntities = new OrderDetailsEntities();
         public ActionResult Index()
         {
             return View();

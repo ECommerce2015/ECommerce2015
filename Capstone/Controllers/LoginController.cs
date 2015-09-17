@@ -38,7 +38,7 @@ namespace Capstone.Controllers
                     clEntity.Entry(customer).State = EntityState.Modified;
                     clEntity.SaveChanges();
                     Session["customerID"] = customer.customer_ID; 
-                    return RedirectToAction("Index", "Customer", new{customer_ID = customer.customer_ID}); 
+                    return RedirectToAction("Index", "Home", new{customer_ID = customer.customer_ID}); 
                 }
                 else
                 { ModelState.AddModelError("", "Email or Password provided is incorrect!"); }                                    
