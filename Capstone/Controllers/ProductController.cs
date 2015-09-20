@@ -170,8 +170,26 @@ namespace Capstone.Controllers
         }
         public ActionResult AddToCart(int product_ID) 
         {
-
           return RedirectToAction("OrderNow", "ShoppingCart", new { product_id = product_ID });
         }
+        public ActionResult ProductSearch(Product product) 
+        {
+            try
+            {
+                List<Product> productInfo = null;
+                if (product.name != null) 
+                {
+                    using(ProductEntities pEntites = new ProductEntities())
+                    {
+                        productInfo = pEntites.Products.Where(x => x.name == product.name).ToList();
+                    }
+                    return RedirectToAction("ProductView", "Product", new { product_id = productInfo[0].product_ID });
+                }
+           }catch(Exception ex)
+           {
+               return RedirectToAction("Index","Home");
+           }
+           return RedirectToAction("Index","Home");
+        } 
     }
 }

@@ -134,6 +134,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SignOutController.cs" />
     <Compile Include="Models\AdminLogin.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -152,6 +153,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AdminLogin.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContactEmail.cs" />
     <Compile Include="Models\CustomerBilling.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -883,6 +885,7 @@
     <Content Include="Views\Admin\Orders.cshtml" />
     <Content Include="Views\Admin\Product.cshtml" />
     <Content Include="Views\Admin\Services.cshtml" />
+    <Content Include="Views\Home\Sent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,6 +18,10 @@ namespace Capstone.Controllers
         OrderDetailsEntities odEntities = new OrderDetailsEntities();
         public ActionResult Index()
         {
+            if (Session["customerID"] == null) 
+            {
+               return  RedirectToAction("Index","Registration");
+            }
             return View();
         }
         [HttpGet]
