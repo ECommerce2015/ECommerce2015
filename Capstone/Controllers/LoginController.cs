@@ -37,7 +37,8 @@ namespace Capstone.Controllers
                     customer.password = customerLogin.password;
                     clEntity.Entry(customer).State = EntityState.Modified;
                     clEntity.SaveChanges();
-                    Session["customerID"] = customer.customer_ID; 
+                    Session["customerID"] = customer.customer_ID;
+                    Session["customerEmail"] = customer.email;
                     return RedirectToAction("Index", "Home", new{customer_ID = customer.customer_ID}); 
                 }
                 else

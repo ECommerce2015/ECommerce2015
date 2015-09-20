@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -50,6 +51,7 @@ namespace Capstone.Controllers
         public ActionResult ProcessCheckout(ShippingAddress shippingaddress,ShippingMethod shippingMethod,CustomerBilling customerBilling, Order order, OrderDetail orderDetail, OrderStatu orderstatus) 
         {
             int customerID = Convert.ToInt32(Session["customerID"]);
+            var customerEmail = Session["customerEmail"].ToString();
             try
             {
                 using (ShippingAddressEntities shippingEntities = new ShippingAddressEntities()) 
@@ -68,26 +70,42 @@ namespace Capstone.Controllers
                     customerBillingentity.CustomerBillings.Add(customerBilling);
                     customerBillingentity.SaveChanges();
                 }
-                //using (OrderDetailsEntities orderDetailsEntities = new OrderDetailsEntities())
-                //{
-                //    orderDetailsEntities.OrderDetails.Add(orderDetail);
-                //    orderDetailsEntities.SaveChanges();
-                //}
-                //using(OrderStatusEntities orderStatus = new OrderStatusEntities())
-                //{
-                //    orderStatus.OrderStatus.Add(orderstatus);
-                //    orderStatus.SaveChanges();
-                //}
-                //using(OrdersEntities ordersEntity = new OrdersEntities())
-                //{
-                //    order.customer_ID = customerID;
-                //    order.customerBilling_ID = customerBilling.customerBilling_ID;
-                //    order.shippingAddress_ID = shippingaddress.shippingAddress_ID;
-                //    order.shippingMethod_ID = shippingMethod.shippingMethod_ID;
-                //    order.customerBilling_ID = customerBilling.customerBilling_ID;
-                //    ordersEntity.Orders.Add(order);
-                //    ordersEntity.SaveChanges();
-                //} 
+                using (OrderDetailsEntities orderDetailsEntities = new OrderDetailsEntities())
+                {
+                    orderDetailsEntities.OrderDetails.Add(orderDetail);
+                    orderDetailsEntities.SaveChanges();
+                }
+                using(OrderStatusEntities orderStatus = new OrderStatusEntities())
+                {
+                    orderStatus.OrderStatus.Add(orderstatus);
+                    orderStatus.SaveChanges();
+                }
+                using(OrdersEntities ordersEntity = new OrdersEntities())
+                {
+                    order.customer_ID = customerID;
+                    order.customerBilling_ID = customerBilling.customerBilling_ID;
+                    order.shippingAddress_ID = shippingaddress.shippingAddress_ID;
+                    order.shippingMethod_ID = shippingMethod.shippingMethod_ID;
+                    order.customerBilling_ID = customerBilling.customerBilling_ID;
+                    ordersEntity.Orders.Add(order);
+                    ordersEntity.SaveChanges();
+                }
+                var body = "<p>Email From: ({0})</p><p>Order Confirmation:</p><p>{2}</p>";
+                MailMessage message = new MailMessage();
+                message.To.Add(new MailAddress(customerEmail));  // replace with valid value 
+                message.Subject = "Customer Contact";
+                message.Body = string.Format(body, "homeshopmvc@gmail.com");
+                message.IsBodyHtml = true;
+
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    smtp.Send(message);
+                    return RedirectToAction("Sent");
+                }
+            }
+            catch(SmtpException ex)
+            {
+                return View("Checkout");
             }
             catch (Exception ex)
             {

@@ -61,33 +61,24 @@ namespace Capstone.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SendContact(ContactEmail contactEmail) 
+        public ActionResult SendContact(ContactEmail contactEmail) 
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
-                    var message = new MailMessage();
-                    
-                    message.To.Add("tnunez@email.neit.edu");
-                    message.From = new MailAddress("HomeShoppeMVC@gmail.com");
+                    MailMessage message = new MailMessage();
+                    message.To.Add(new MailAddress("tnunez@email.neit.edu"));  // replace with valid value 
                     message.Subject = "Customer Contact";
-                    message.Body = string.Format(body, contactEmail.Message);
+                    message.Body = string.Format(body, contactEmail.FromName, contactEmail.FromEmail, contactEmail.Message);
                     message.IsBodyHtml = true;
 
-                    const string sender = "HomeShoppeMVC@gmail.com";
-                    const string password = "capstone2015";
-
-                    using (var smtp = new SmtpClient("smtp.gmail.com",587))
+                    using (SmtpClient smtp = new SmtpClient())
                     {
-                        smtp.UseDefaultCredentials = false;
-                        smtp.Credentials = new NetworkCredential(sender, password);
-                        smtp.EnableSsl = true;
                         smtp.Send(message);
                         return RedirectToAction("Sent");
-                     }
-                    
+                    }
                 }
             }catch(SmtpException ex)
             {
