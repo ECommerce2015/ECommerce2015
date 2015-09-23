@@ -70,38 +70,36 @@ namespace Capstone.Controllers
                     customerBillingentity.CustomerBillings.Add(customerBilling);
                     customerBillingentity.SaveChanges();
                 }
-                using (OrderDetailsEntities orderDetailsEntities = new OrderDetailsEntities())
+                //loop through products in the cart session 
+                //the information is used to populate database
+                foreach (Item item in (List<Item>)Session["cart"])
                 {
-                    orderDetailsEntities.OrderDetails.Add(orderDetail);
-                    orderDetailsEntities.SaveChanges();
+                    using (OrderDetailsEntities orderDetailsEntities = new OrderDetailsEntities())
+                    {
+                        orderDetail.product_ID = item.Pr.product_ID;
+                        orderDetail.quantity = item.Pr.quantity;
+                        orderDetail.total = item.Pr.quantity * item.Pr.price;
+                        orderDetailsEntities.OrderDetails.Add(orderDetail);
+                        orderDetailsEntities.SaveChanges();
+                    }
+                    using (OrdersEntities ordersEntity = new OrdersEntities())
+                    {
+                        decimal total = item.Pr.quantity * item.Pr.price;
+                        order.orderDetails_ID = orderDetail.orderDetails_ID;
+                        order.customer_ID = customerID;
+                        order.orderStatus_ID = 1; //pending order look at table OrderStatus
+                        order.customerBilling_ID = customerBilling.customerBilling_ID;
+                        order.shippingAddress_ID = shippingaddress.shippingAddress_ID;
+                        order.shippingMethod_ID = shippingMethod.shippingMethod_ID;
+                        order.customerBilling_ID = customerBilling.customerBilling_ID;
+                        order.orderDate = DateTime.Now;
+                        order.tax = total  * Convert.ToDecimal(.07);
+                        order.grandTotal = order.tax + total;
+                        ordersEntity.Orders.Add(order);
+                        ordersEntity.SaveChanges();
+                    }
                 }
-                using(OrderStatusEntities orderStatus = new OrderStatusEntities())
-                {
-                    orderStatus.OrderStatus.Add(orderstatus);
-                    orderStatus.SaveChanges();
-                }
-                using(OrdersEntities ordersEntity = new OrdersEntities())
-                {
-                    order.customer_ID = customerID;
-                    order.customerBilling_ID = customerBilling.customerBilling_ID;
-                    order.shippingAddress_ID = shippingaddress.shippingAddress_ID;
-                    order.shippingMethod_ID = shippingMethod.shippingMethod_ID;
-                    order.customerBilling_ID = customerBilling.customerBilling_ID;
-                    ordersEntity.Orders.Add(order);
-                    ordersEntity.SaveChanges();
-                }
-                var body = "<p>Email From: ({0})</p><p>Order Confirmation:</p><p>{2}</p>";
-                MailMessage message = new MailMessage();
-                message.To.Add(new MailAddress(customerEmail));  // replace with valid value 
-                message.Subject = "Customer Contact";
-                message.Body = string.Format(body, "homeshopmvc@gmail.com");
-                message.IsBodyHtml = true;
-
-                using (SmtpClient smtp = new SmtpClient())
-                {
-                    smtp.Send(message);
-                    return RedirectToAction("Sent");
-                }
+                return RedirectToAction("Sent");
             }
             catch(SmtpException ex)
             {
@@ -114,6 +112,10 @@ namespace Capstone.Controllers
             //possibly write an if statement if they are not logged in make them login 
             //else go to the dashboard
             return RedirectToAction("Index","Home");
+        }
+        public ActionResult Sent()
+        {
+            return View();
         }
     }
 }

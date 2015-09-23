@@ -641,23 +641,6 @@
     <Content Include="font-awesome\scss\_spinning.scss" />
     <Content Include="font-awesome\scss\_stacked.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
-    <EntityDeploy Include="Models\Orders.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Orders.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Orders.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Orders.edmx</DependentUpon>
-      <LastGenOutput>Orders.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Orders.edmx.diagram">
-      <DependentUpon>Orders.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Orders.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Orders.edmx</DependentUpon>
-      <LastGenOutput>Orders.cs</LastGenOutput>
-    </Content>
     <EntityDeploy Include="Models\AdminLogin.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AdminLogin.Designer.cs</LastGenOutput>
@@ -811,6 +794,23 @@
       <DependentUpon>OrderStatus.edmx</DependentUpon>
       <LastGenOutput>OrderStatus.cs</LastGenOutput>
     </Content>
+    <EntityDeploy Include="Models\Orders.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Orders.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Orders.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Orders.edmx</DependentUpon>
+      <LastGenOutput>Orders.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Orders.edmx.diagram">
+      <DependentUpon>Orders.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Orders.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Orders.edmx</DependentUpon>
+      <LastGenOutput>Orders.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\excanvas.min.js" />
     <Content Include="Scripts\flot-data.js" />
@@ -886,6 +886,7 @@
     <Content Include="Views\Admin\Product.cshtml" />
     <Content Include="Views\Admin\Services.cshtml" />
     <Content Include="Views\Home\Sent.cshtml" />
+    <Content Include="Views\Checkout\Sent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
