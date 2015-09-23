@@ -154,6 +154,11 @@
       <DependentUpon>AdminLogin.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ContactEmail.cs" />
+    <Compile Include="Models\CustomerAddress1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerAddress.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CustomerBilling.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -227,11 +232,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CustomerAddress.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CustomerAddress1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerAddress.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerLogin.Context.cs">
       <AutoGen>True</AutoGen>

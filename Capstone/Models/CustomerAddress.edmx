@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Capstone.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Capstone.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CustomerAddress">
           <Key>
             <PropertyRef Name="customerAddress_ID" />
@@ -15,12 +15,12 @@
           <Property Name="city" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="state" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="zip" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="customer_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="CapstoneStoreContainer">
           <EntitySet Name="CustomerAddress" EntityType="Self.CustomerAddress" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Capstone" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -34,6 +34,7 @@
           <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customer_ID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityContainer Name="CustomerAddressEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CustomerAddresses" EntityType="Self.CustomerAddress" />
@@ -47,6 +48,7 @@
           <EntitySetMapping Name="CustomerAddresses">
             <EntityTypeMapping TypeName="Capstone.CustomerAddress">
               <MappingFragment StoreEntitySet="CustomerAddress">
+                <ScalarProperty Name="customer_ID" ColumnName="customer_ID" />
                 <ScalarProperty Name="customerAddress_ID" ColumnName="customerAddress_ID" />
                 <ScalarProperty Name="address1" ColumnName="address1" />
                 <ScalarProperty Name="address2" ColumnName="address2" />

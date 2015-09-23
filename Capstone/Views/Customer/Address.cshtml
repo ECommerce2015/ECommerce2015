@@ -2,49 +2,59 @@
     ViewBag.Title = "Address";
     Layout = "~/Views/Shared/_LayoutDashBoard.cshtml";
 }
-<div id="page-wrapper">
-    <div class="container-fluid">
-        <h1>Sign Up</h1>
-        <div class="form-group">
-            <form class="form-horizontal">
+@using Capstone.Models
+
+@using (Html.BeginForm("Address", "Customer", FormMethod.Post, new { id = "customerAddresssForm" }))
+{ 
+    @Html.AntiForgeryToken()
+    if (ViewBag.customerAdddressinfo != null)
+    {
+        <input type="text" hidden name="customer_ID" value="@ViewBag.customerAdddressinfo[0].customer_ID" >
+        <input type="text" hidden name="customerAddress_ID" value="@ViewBag.customerAdddressinfo[0].customerAddress_ID">
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <h1>Sign Up</h1>
                 <div class="form-group">
-                    <label class="control-label col-xs-3" for="inputfirstaddress">First Address:</label>
-                    <div class="col-xs-9">
-                        <input type="text" class="form-control" id="inputFirstaddress" placeholder="First Adddress">
-                    </div>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputfirstaddress">First Address:</label>
+                            <div class="col-xs-9">
+                                <input name="address1" type="text" value="@ViewBag.customerAdddressinfo[0].address1" class="form-control" id="inputFirstaddress" placeholder="First Adddress">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputsecondaddress">Second Address:</label>
+                            <div class="col-xs-9">
+                                <input name="address2" type="text" value="@ViewBag.customerAdddressinfo[0].address2" class="form-control" id="inputSecondaddress" placeholder="Second Address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputcity">City:</label>
+                            <div class="col-xs-9">
+                                <input name="city" type="text" value="@ViewBag.customerAdddressinfo[0].city" class="form-control" id="city" placeholder="City">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputstate">State:</label>
+                            <div class="col-xs-9">
+                                <input name="state" type="text" value="@ViewBag.customerAdddressinfo[0].state" class="form-control" id="state" placeholder="State">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputzip">Zip:</label>
+                            <div class="col-xs-9">
+                                <input name="zip" type="tel" value="@ViewBag.customerAdddressinfo[0].zip" class="form-control" id="zip" placeholder="Zip">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <div class="col-xs-offset-3 col-xs-9">
+                                <input type="submit" class="btn btn-primary" value="Submit">
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-xs-3" for="inputsecondaddress">Second Address:</label>
-                    <div class="col-xs-9">
-                        <input type="text" class="form-control" id="inputSecondaddress" placeholder="Second Address">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-xs-3" for="inputcity">City:</label>
-                    <div class="col-xs-9">
-                        <input type="text" class="form-control" id="city" placeholder="City">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-xs-3" for="inputstate">State:</label>
-                    <div class="col-xs-9">
-                        <input type="text" class="form-control" id="state" placeholder="State">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-xs-3" for="inputzip">Zip:</label>
-                    <div class="col-xs-9">
-                        <input type="tel" class="form-control" id="zip" placeholder="Zip">
-                    </div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <div class="col-xs-offset-3 col-xs-9">
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                        <input type="reset" class="btn btn-default" value="Reset">
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
+    }
+}

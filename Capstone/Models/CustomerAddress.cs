@@ -11,52 +11,15 @@ namespace Capstone.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class CustomerAddress
     {
-        public CustomerAddress(){}
-        public CustomerAddress(string address1, string address2, string city, string state, string zip) 
-        {
-            this.address1 = address1;
-            this.address2 = address2;
-            this.city = city;
-            this.state = state;
-            this.zip = zip;
-        }
-
-        [Required]
         public int customerAddress_ID { get; set; }
-        [Required]
-        [DataType(DataType.Text)]
-        [StringLength(50, ErrorMessage = "{0}: 50 is the limit")]
         public string address1 { get; set; }
-        [Required]
-        [DataType(DataType.Text)]
-        [StringLength(50, ErrorMessage = "{0}: 50 is the limit")]
         public string address2 { get; set; }
-        [Required]
-        [DataType(DataType.Text)]
-        [StringLength(50, ErrorMessage = "{0}: 50 is the limit")]
         public string city { get; set; }
-        [Required]
-        [StringLength(2)]
         public string state { get; set; }
-        [Required]
-        [DataType(DataType.Text)]
-        [StringLength(5, ErrorMessage = "{0}: 5 is the limit")]
         public string zip { get; set; }
-
-        public static CustomerAddress ConvertToProperty(DataRow dr)
-        {
-            CustomerAddress _customerAddress = new CustomerAddress();
-            _customerAddress.customerAddress_ID = Convert.ToInt32(dr["customerAddress_ID"]);
-            _customerAddress.address1 = dr["address1"].ToString();
-            _customerAddress.address2 = dr["address2"].ToString();
-            _customerAddress.city = dr["city"].ToString();
-            _customerAddress.state = dr["state"].ToString();
-            _customerAddress.zip = dr["zip"].ToString();
-            return _customerAddress;
-        }
+        public int customer_ID { get; set; }
     }
 }

@@ -20,30 +20,41 @@ namespace Capstone.Controllers
         {
             if (Session["customerID"] == null) 
             {
-               return  RedirectToAction("Index","Registration");
+                return  RedirectToAction("Index","Registration");
+            }
+            if (Session["customerID"] != null)
+            {
+                using (CustomerEntities cEntites = new CustomerEntities())
+                {
+                    int customerID = Convert.ToInt32(Session["customerID"]);
+                    List<Customer> customerList = cEntites.Customers.Where(x => x.customer_ID == customerID).ToList();
+                    ViewBag.customerName = customerList[0].firstName + " " + customerList[0].lastName;
+                }
             }
             return View();
         }
         [HttpGet]
-        public ActionResult Account(int userID)
+        public ActionResult Account()
         {
             if (ModelState.IsValid)
             {
                 using (CustomerEntities cEntities = new CustomerEntities())
                 {
-                    ViewBag.customerInfo = cEntities.Customers.Where(x => x.customer_ID == userID).ToList();
+                    int customerID = Convert.ToInt32(Session["customerID"]);
+                    ViewBag.customerInfo = cEntities.Customers.Where(x => x.customer_ID == customerID).ToList();
                 }
             }
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Account([Bind(Include = "customer_ID,firstName,lastName,email,phone")] Customer customer)
+        public ActionResult Account(Customer customer)
         {
             if (ModelState.IsValid)
             {
                 using (CustomerEntities cEntities = new CustomerEntities())
                 {
+                    customer.customer_ID = Convert.ToInt32(Session["customerID"]);
                     cEntities.Entry(customer).State = EntityState.Modified;
                     cEntities.SaveChanges();
                     return RedirectToAction("Account");
@@ -52,37 +63,49 @@ namespace Capstone.Controllers
             return View();            
         }
         [HttpGet]
-        public ActionResult Address(int custaddID) 
+        public ActionResult Address() 
         {
             if (ModelState.IsValid) 
             {
                 using(CustomerAddressEntities caEntities = new CustomerAddressEntities())
                 {
-                    ViewBag.customerInfo = caEntities.CustomerAddresses.Where(x => x.customerAddress_ID == custaddID).ToList();
+                    int customerID = Convert.ToInt32(Session["customerID"]);
+                    ViewBag.customerAdddressinfo = caEntities.CustomerAddresses.Where(x => x.customer_ID == customerID).ToList();
                 }
             }
             return View();
         }
         [HttpPost]
-        public ActionResult Address([Bind(Include = "customerAddress_ID,address1,address2,city,state,zip")] CustomerAddress
-            customerAddress)
+        [ValidateAntiForgeryToken]
+        public ActionResult Address(CustomerAddress customerAddress)
         {
             if (ModelState.IsValid)
             {
                 using (CustomerAddressEntities caEntities = new CustomerAddressEntities())
                 {
-                    ViewBag.customerInfo = caEntities.CustomerAddresses.Where(x => x.customerAddress_ID == customerAddress.customerAddress_ID).ToList();
+                    caEntities.Entry(customerAddress).State = EntityState.Modified;
+                    caEntities.SaveChanges();
+                    return RedirectToAction("Address");
                 }
             }
             return View();
         }
+        [HttpGet]
         public ActionResult Billing()
         {
+            if (ModelState.IsValid)
+            {
+                int customerID = Convert.ToInt32(Session["customerID"]);
+                using(CustomerBillingEntities cbentities = new CustomerBillingEntities())
+                {
+                    ViewBag.customerBillinginfo = cbentities.CustomerBillings.Where(x => x.customer_ID == customerID).ToList().FirstOrDefault();
+                }
+            }
             return View();
         }
-        public ActionResult Orders() 
+        public ActionResult Signout()
         {
-            return View();
+            return RedirectToAction("Index", "Signout");
         }
     }
 }
