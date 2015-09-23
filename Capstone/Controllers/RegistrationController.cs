@@ -49,6 +49,7 @@ namespace Capstone.Controllers
                     }
                     using (CustomerAddressEntities caEntity = new CustomerAddressEntities())
                     {
+                        customerAddress.customer_ID = customer.customer_ID;
                         //inserting into customer address table
                         caEntity.CustomerAddresses.Add(customerAddress);
                         caEntity.SaveChanges();
@@ -61,7 +62,7 @@ namespace Capstone.Controllers
                         //inserting into customer login table
                         clEntity.CustomerLogins.Add(customerLogin);
                         clEntity.SaveChanges();
-                        return RedirectToAction("Index", "Customer", new { customer_ID = customerLogin.customer_ID });
+                        return RedirectToAction("Index", "Customer");
                     }
                 }
                 else 
