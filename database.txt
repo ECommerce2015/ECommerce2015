@@ -1,375 +1,1886 @@
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AdminLogin]'))
-BEGIN
-CREATE TABLE [dbo].[AdminLogin]
-(
-	[adminLogin_ID] [int] NOT NULL IDENTITY(1,1),
-	[login] [int] NOT NULL,
-	[password] [varchar] (30) NOT NULL,
+USE [SE425JR]
+GO
+ALTER TABLE [dbo].[ShippingAddress] DROP CONSTRAINT [FK_ShippingAddress_ShippingMethod]
+GO
+ALTER TABLE [dbo].[ShippingAddress] DROP CONSTRAINT [FK_ShippingAddress_CustomerAddress]
+GO
+ALTER TABLE [dbo].[ShippingAddress] DROP CONSTRAINT [FK_ShippingAddress_Customer]
+GO
+ALTER TABLE [dbo].[Product] DROP CONSTRAINT [FK_Product_ProductStatus]
+GO
+ALTER TABLE [dbo].[Product] DROP CONSTRAINT [FK_Product_Category]
+GO
+ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_Orders_ShippingMethod]
+GO
+ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_Orders_ShippingAddress]
+GO
+ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_Orders_OrderStatus]
+GO
+ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_Orders_OrderDetails]
+GO
+ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_Orders_CustomerBilling]
+GO
+ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_Orders_Customer]
+GO
+ALTER TABLE [dbo].[OrderDetails] DROP CONSTRAINT [FK_OrderDetails_Product]
+GO
+ALTER TABLE [dbo].[CustomerLogin] DROP CONSTRAINT [FK_CustomerLogin_Customer]
+GO
+ALTER TABLE [dbo].[CustomerBilling] DROP CONSTRAINT [FK_CustomerBilling_Customer]
+GO
+ALTER TABLE [dbo].[CustomerAddress] DROP CONSTRAINT [FK_CustomerAddress_Customer]
+GO
+ALTER TABLE [dbo].[Category] DROP CONSTRAINT [FK_Category_Subcategory]
+GO
+ALTER TABLE [dbo].[Category] DROP CONSTRAINT [FK_Category_AdminLogin]
+GO
+/****** Object:  Table [dbo].[Subcategory]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[Subcategory]
+GO
+/****** Object:  Table [dbo].[States]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[States]
+GO
+/****** Object:  Table [dbo].[ShippingMethod]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[ShippingMethod]
+GO
+/****** Object:  Table [dbo].[ShippingAddress]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[ShippingAddress]
+GO
+/****** Object:  Table [dbo].[Services]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[Services]
+GO
+/****** Object:  Table [dbo].[ProductStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[ProductStatus]
+GO
+/****** Object:  Table [dbo].[Product]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[Product]
+GO
+/****** Object:  Table [dbo].[OrderStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[OrderStatus]
+GO
+/****** Object:  Table [dbo].[Orders]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[Orders]
+GO
+/****** Object:  Table [dbo].[OrderDetails]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[OrderDetails]
+GO
+/****** Object:  Table [dbo].[CustomerLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[CustomerLogin]
+GO
+/****** Object:  Table [dbo].[CustomerBilling]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[CustomerBilling]
+GO
+/****** Object:  Table [dbo].[CustomerAddress]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[CustomerAddress]
+GO
+/****** Object:  Table [dbo].[Customer]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[Customer]
+GO
+/****** Object:  Table [dbo].[Category]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[Category]
+GO
+/****** Object:  Table [dbo].[AdminLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP TABLE [dbo].[AdminLogin]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateSubcategory]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateSubcategory]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateShippingAddress]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateShippingAddress]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateServices]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateServices]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateProductStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateProductStatus]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateProduct]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateProduct]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateOrderStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateOrderStatus]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateOrders]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateOrders]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateOrderDetails]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateOrderDetails]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateCustomerLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateCustomerLogin]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateCustomerBilling]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateCustomerBilling]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateCustomerAddress]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateCustomerAddress]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateCustomer]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateCustomer]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateCategory]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateCategory]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateAdminLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_UpdateAdminLogin]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertShippingMethod]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertShippingMethod]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertServices]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertServices]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertProductStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertProductStatus]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertProduct]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertProduct]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertOderStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertOderStatus]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertOders]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertOders]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertOderDetails]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertOderDetails]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertCustomerLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertCustomerLogin]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertCustomerBilling]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertCustomerBilling]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertCustomerAddress]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertCustomerAddress]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertCustomer]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertCustomer]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertCategory]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertCategory]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertAdminLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP PROCEDURE [dbo].[Sp_InsertAdminLogin]
+GO
+/****** Object:  User [JRola]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP USER [JRola]
+GO
+USE [master]
+GO
+/****** Object:  Database [SE425JR]    Script Date: 9/24/2015 12:20:33 PM ******/
+DROP DATABASE [SE425JR]
+GO
+/****** Object:  Database [SE425JR]    Script Date: 9/24/2015 12:20:33 PM ******/
+CREATE DATABASE [SE425JR]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'SE425JR', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\SE425JR.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'SE425JR_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\SE425JR_log.ldf' , SIZE = 4096KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [SE425JR] SET COMPATIBILITY_LEVEL = 110
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [SE425JR].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [SE425JR] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [SE425JR] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [SE425JR] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [SE425JR] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [SE425JR] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [SE425JR] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [SE425JR] SET AUTO_CREATE_STATISTICS ON 
+GO
+ALTER DATABASE [SE425JR] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [SE425JR] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [SE425JR] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [SE425JR] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [SE425JR] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [SE425JR] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [SE425JR] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [SE425JR] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [SE425JR] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [SE425JR] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [SE425JR] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [SE425JR] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [SE425JR] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [SE425JR] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [SE425JR] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [SE425JR] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [SE425JR] SET RECOVERY FULL 
+GO
+ALTER DATABASE [SE425JR] SET  MULTI_USER 
+GO
+ALTER DATABASE [SE425JR] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [SE425JR] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [SE425JR] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [SE425JR] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'SE425JR', N'ON'
+GO
+USE [SE425JR]
+GO
+/****** Object:  User [JRola]    Script Date: 9/24/2015 12:20:33 PM ******/
+CREATE USER [JRola] FOR LOGIN [JRola] WITH DEFAULT_SCHEMA=[dbo]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [JRola]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertAdminLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertAdminLogin]
+ 
+@UserName varchar(30)
+,@password varchar(30)
+,@attempts int
+,@email varchar(10)
+,@permission varchar(30)
+AS
+ 
+INSERT INTO [dbo].[AdminLogin]
+           ([Username]
+		   ,[password]
+           ,[attempts]
+           ,[email]
+		   ,[permissions])
+     VALUES
+           (@UserName
+           ,@password
+           ,@attempts
+		   ,@email
+		   ,@permission);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertCategory]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertCategory]
+ 
+@adminLogin_ID int
+,@subcategory_ID int
+,@name varchar(50)
+AS
+ 
+INSERT INTO [dbo].[Category]
+           ([adminLogin_ID]
+		   ,[subcategory_ID]
+           ,[name])
+     VALUES
+           (@adminLogin_ID
+           ,@subcategory_ID
+           ,@name);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertCustomer]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertCustomer]
+ 
+@firstName varchar(30)
+,@lastName varchar(30)
+,@email varchar(50)
+,@phone varchar(10)
+AS
+ 
+INSERT INTO [dbo].[Customer]
+           ([firstName]
+           ,[lastName]
+           ,[email]
+		   ,[phone])
+     VALUES
+           (@firstName
+           ,@lastName
+           ,@email
+		   ,@phone);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertCustomerAddress]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertCustomerAddress]
+ 
+@address1 varchar(30)
+,@address2 varchar(30)
+,@city varchar(50)
+,@state varchar(10)
+,@zip varchar(5)
+AS
+ 
+INSERT INTO [dbo].[CustomerAddress]
+           ([address1]
+           ,[address2]
+           ,[city]
+		   ,[state]
+		   ,[zip])
+     VALUES
+           (@address1
+           ,@address2
+           ,@city
+		   ,@state
+		   ,@zip);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertCustomerBilling]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertCustomerBilling] 
+ 
+@cardType int
+,@cardNumber int
+,@expireDate varchar(50)
+AS
+ 
+INSERT INTO [dbo].[CustomerBilling]
+           ([cardType]
+		   ,[cardNumber]
+           ,[expireDate])
+     VALUES
+           (@cardType
+           ,@cardNumber
+           ,@expireDate);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertCustomerLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertCustomerLogin] 
+ 
+@customer_ID int
+,@email varchar(50)
+,@password varchar(50)
+,@dateCreated datetime
+AS
+ 
+INSERT INTO [dbo].[CustomerLogin]
+           ([customer_ID]
+		   ,[email]
+           ,[password]
+		   ,[dateCreated])
+     VALUES
+           (@customer_ID
+           ,@email
+           ,@password
+		   ,@dateCreated);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertOderDetails]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertOderDetails]
+ 
+@product_ID int
+,@quantity int
+,@total decimal
+AS
+ 
+INSERT INTO [dbo].[OrderDetails]
+           ([product_ID]
+		   ,[quantity]
+           ,[total])
+     VALUES
+           (@product_ID
+           ,@quantity
+           ,@total);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertOders]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertOders]
+ 
+@customer_ID int
+,@shippingAddress_ID int
+,@customerBilling_ID int
+,@orderDetails_ID int
+,@orderStatus_ID int
+,@shippingMethod_ID int
+,@orderDate datetime
+,@tax decimal
+,@grandTotal decimal
+AS
+ 
+INSERT INTO [dbo].[Orders]
+           ([shippingAddress_ID]
+		   ,[customerBilling_ID]
+           ,[orderDetails_ID]
+		   ,[orderStatus_ID]
+		   ,[shippingMethod_ID]
+		   ,[orderDate]
+		   ,[tax]
+		   ,[grandTotal])
+     VALUES
+           (@shippingAddress_ID
+           ,@customerBilling_ID
+           ,@orderDetails_ID
+		   ,@orderStatus_ID
+		   ,@shippingMethod_ID
+		   ,@orderDate
+		   ,@tax
+		   ,@grandTotal);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertOderStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertOderStatus]
+ 
+@statusCode int
+,@description int
+AS
+ 
+INSERT INTO [dbo].[OrderStatus]
+           ([statusCode]
+		   ,[description])
+     VALUES
+           (@statusCode
+           ,@description);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertProduct]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertProduct]
+ 
+@category_ID int
+,@productStatus_ID int
+,@name varchar(50)
+,@description varchar(200)
+,@price decimal
+,@quantity int
+,@image varchar(200)
+AS
+ 
+INSERT INTO [dbo].[Product]
+           ([category_ID]
+		   ,[productStatus_ID]
+		   ,[name]
+		   ,[description]
+		   ,[price]
+		   ,[quantity]
+		   ,[image])
+     VALUES
+           (@category_ID
+		   ,@productStatus_ID
+		   ,@name
+		   ,@description
+		   ,@price
+		   ,@quantity
+		   ,@image);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertProductStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertProductStatus]
+ 
+@statusCode varchar(30)
+,@description varchar(200)
+AS
+ 
+INSERT INTO [dbo].[ProductStatus]
+           ([statusCode]
+		   ,[description])
+     VALUES
+           (@statusCode
+		   ,@description);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertServices]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertServices]
+ 
+@name varchar(50)
+,@description varchar(200)
+AS
+ 
+INSERT INTO [dbo].[Services]
+           ([name]
+		   ,[description])
+     VALUES
+           (@name
+		   ,@description);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_InsertShippingMethod]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_InsertShippingMethod]
+ 
+@type int
+,@shippingCost int
+AS
+ 
+INSERT INTO [dbo].[ShippingMethod]
+           ([type]
+		   ,[shippingMethod_ID])
+     VALUES
+           (@type
+		   ,@shippingCost);
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateAdminLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateAdminLogin]
+@adminLogin_ID int
+,@UserName varchar(30)
+,@password varchar(30)
+,@attempts int
+,@email varchar(10)
+,@permissions varchar(30)
+AS
+ 
+UPDATE [dbo].[AdminLogin]
+   SET [Username] = @UserName
+		   ,[password] = @password
+           ,[attempts] = @attempts
+           ,[email] = @email
+		   ,[permissions] = @permissions
+ WHERE adminLogin_ID = @adminLogin_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateCategory]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateCategory]
+@category_ID int
+,@adminLogin_ID int
+,@subcategory_ID int
+,@name varchar(50)
+AS
+ 
+UPDATE [dbo].[Category]
+   SET [adminLogin_ID] = @adminLogin_ID
+		   ,[subcategory_ID] = @subcategory_ID
+           ,[name] = @name
+ WHERE category_ID = @category_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateCustomer]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateCustomer]
+@customer_ID int
+,@firstName varchar(30)
+,@lastName varchar(30)
+,@email varchar(100)
+,@phone varchar(10)
+AS
+ 
+UPDATE [dbo].[Customer]
+   SET [firstName] = @firstName
+		   ,[lastName] = @lastName
+           ,[email] = @email
+		   ,[phone] = @phone
+ WHERE customer_ID = @customer_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateCustomerAddress]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateCustomerAddress]
+@customerAddress_ID int
+,@address1 varchar(50)
+,@address2 varchar(50)
+,@city varchar(50)
+,@state varchar(2)
+,@zip varchar(5)
+AS
+ 
+UPDATE [dbo].[CustomerAddress]
+   SET [address1] = @address1
+           ,[address2] = @address2
+		   ,[city] = @city
+		   ,[state] = @state
+		   ,[zip] = @zip
+ WHERE customerAddress_ID = @customerAddress_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateCustomerBilling]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateCustomerBilling]
+@customerBilling_ID int
+,@cardType int
+,@cardNumber varchar(16)
+,@expireDate datetime
+AS
+ 
+UPDATE [dbo].[CustomerBilling]
+   SET [cardType] = @cardType
+           ,[cardNumber] = @cardNumber
+		   ,[expireDate] = @expireDate
+ WHERE customerBilling_ID = @customerBilling_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateCustomerLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateCustomerLogin]
+@customerLogin_ID int
+,@customer_ID int
+,@email varchar(50)
+,@password varchar(50)
+,@dateCreated datetime
+AS
+ 
+UPDATE [dbo].[CustomerLogin]
+   SET [customer_ID] = @customer_ID
+           ,[email] = @email
+		   ,[password] = @password
+		   ,[dateCreated] = @dateCreated
+ WHERE customerLogin_ID = @customerLogin_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateOrderDetails]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateOrderDetails]
+@orderDetails_ID int
+,@product_ID int
+,@quantity int
+,@total decimal
+AS
+ 
+UPDATE [dbo].[OrderDetails]
+   SET [product_ID] = @product_ID
+           ,[quantity] = @quantity
+		   ,[total] = @total
+ WHERE orderDetails_ID = @orderDetails_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateOrders]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateOrders]
+@order_ID int
+,@customer_ID int
+,@shippingAddress_ID int
+,@customerBilling_ID int
+,@orderDetails_ID int
+,@shippingMethod_ID int
+,@orderDate datetime
+,@tax decimal
+,@grandTotal decimal
+AS
+ 
+UPDATE [dbo].[Orders]
+   SET [customer_ID] = @customer_ID 
+	   ,[shippingAddress_ID] = @shippingAddress_ID
+		,[customerBilling_ID] = @customerBilling_ID
+		,[orderDetails_ID] = @orderDetails_ID 
+		,[shippingMethod_ID] = @shippingMethod_ID
+		,[orderDate] = @orderDate
+		,[tax] = @tax 
+		,[grandTotal] = @grandTotal
+ WHERE order_ID = @order_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateOrderStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateOrderStatus]
+@orderStatus_ID int
+,@statusCode int
+,@description varchar(200)
+AS
+ 
+UPDATE [dbo].[OrderStatus]
+   SET [statusCode] = @statusCode
+	   ,[description] = @description
+ WHERE orderStatus_ID = @orderStatus_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateProduct]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateProduct]
+@product_ID int
+,@category_ID int
+,@productStatus_ID int
+,@name varchar(50)
+,@description varchar(200)
+,@price decimal
+,@quantity int
+,@image varchar(200)
+AS
+ 
+UPDATE [dbo].[Product]
+   SET [category_ID] = @category_ID
+	   ,[productStatus_ID] = @productStatus_ID
+	   ,[name] = @name
+	   ,[description] = @description
+	   ,[price] = @price
+	   ,[quantity] = @quantity
+	   ,[image] = @image
+ WHERE product_ID = @product_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateProductStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateProductStatus]
+@productStatus_ID int
+,@statusCode varchar(30)
+,@description varchar(200)
+AS
+ 
+UPDATE [dbo].[ProductStatus]
+   SET [statusCode] = @statusCode
+	   ,[description] = @description
+ WHERE productStatus_ID = @productStatus_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateServices]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateServices]
+@service_id int
+,@name varchar(50)
+,@description varchar(200)
+AS
+ 
+UPDATE [dbo].[Services]
+   SET [name] = @name
+	   ,[description] = @description
+ WHERE service_id = @service_id
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateShippingAddress]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateShippingAddress]
+@shippingAddress_ID int
+,@customer_ID int
+,@CustomerAddress_ID int
+,@address1 varchar(100)
+,@city varchar(100)
+,@state varchar(2)
+,@zipcode varchar(5)
+AS
+ 
+UPDATE [dbo].[ShippingAddress]
+   SET [customer_ID] = customer_ID
+	   ,[CustomerAddress_ID] = @CustomerAddress_ID
+	   ,[address1] = @address1
+	   ,[city] = @city
+	   ,[state] = @state
+	   ,[zipcode] = @zipcode 
+ WHERE shippingAddress_ID = @shippingAddress_ID
+ 
+ 
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_UpdateSubcategory]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Thomas Nunez
+-- Create date: 8/3/2015
+-- Description:	Insert into the Customer table
+-- =============================================
+CREATE PROCEDURE [dbo].[Sp_UpdateSubcategory]
+@subcategory_ID int
+,@name varchar(50)
+AS
+ 
+UPDATE [dbo].[Subcategory]
+   SET [name] = @name
+ WHERE subcategory_ID = @subcategory_ID
+ 
+ 
+
+GO
+/****** Object:  Table [dbo].[AdminLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[AdminLogin](
+	[adminLogin_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Username] [varchar](30) NOT NULL,
+	[password] [varchar](30) NOT NULL,
 	[attempts] [int] NOT NULL,
 	[email] [varchar](30) NOT NULL,
-	[permissions] [varchar](30) NOT NULL
-
-	CONSTRAINT [PK_AdminLogin] PRIMARY KEY CLUSTERED 
-	(
-		[adminLogin_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Category]'))
-BEGIN
-CREATE TABLE [dbo].[Category]
+	[permissions] [varchar](30) NOT NULL,
+ CONSTRAINT [PK_AdminLogin] PRIMARY KEY CLUSTERED 
 (
-	[category_ID] [int] NOT NULL IDENTITY(1,1),
+	[adminLogin_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Category]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Category](
+	[category_ID] [int] IDENTITY(1,1) NOT NULL,
 	[adminLogin_ID] [int] NOT NULL,
-	[subcategory_ID] [int] NOT NULL,
-	[name] [varchar] (50) NOT NULL,
-	[description] [varchar] (200) NOT NULL
-
-	CONSTRAINT [PK_Category]  PRIMARY KEY CLUSTERED 
-	(
-		[category_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Subcategory]'))
-BEGIN
-CREATE TABLE [dbo].[Subcategory]
+	[subcategory_ID] [int] NULL,
+	[name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED 
 (
-	[subcategory_ID] [int] NOT NULL IDENTITY(1,1),
-	[name] [varchar] (50) NOT NULL,
-	[description] [varchar] (200) NOT NULL
+	[category_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-	CONSTRAINT [PK_Subcategory] PRIMARY KEY CLUSTERED
-	(
-		[subcategory_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ProductStatus]'))
-BEGIN
-CREATE TABLE [dbo].[ProductStatus]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Customer]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Customer](
+	[customer_ID] [int] IDENTITY(1,1) NOT NULL,
+	[firstName] [varchar](30) NOT NULL,
+	[lastName] [varchar](30) NOT NULL,
+	[email] [varchar](30) NOT NULL,
+	[phone] [varchar](10) NOT NULL,
+ CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
 (
-	[productStatus_ID] [int] NOT NULL IDENTITY(1,1),
-	[statusCode] [varchar] (30) NOT NULL,
-	[description] [varchar] (200) NOT NULL
+	[customer_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-	CONSTRAINT [PK_[ProductStatus] PRIMARY KEY CLUSTERED
-	(
-		[productStatus_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ShippingAddress]'))
-BEGIN
-CREATE TABLE [dbo].[ShippingAddress]
-(
-	[shippingAddress_ID] [int] NOT NULL IDENTITY(1,1),
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[CustomerAddress]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CustomerAddress](
+	[customerAddress_ID] [int] IDENTITY(1,1) NOT NULL,
+	[address1] [varchar](50) NOT NULL,
+	[address2] [varchar](50) NULL,
+	[city] [varchar](50) NOT NULL,
+	[state] [varchar](2) NOT NULL,
+	[zip] [varchar](5) NOT NULL,
 	[customer_ID] [int] NOT NULL,
-	[CustomerAddress_ID] [int] NOT NULL,
-	[address1] [varchar] (100) NOT NULL,
-	[city] [varchar] (100) NOT NULL,
-	[state] [varchar] (2) NOT NULL,
-	[zipcode] [varchar] (5) NOT NULL
-
-	CONSTRAINT [PK_ShippingAddress] PRIMARY KEY CLUSTERED
-	(
-		[shippingAddress_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Services]'))
-BEGIN
-CREATE TABLE [dbo].[Services]
+ CONSTRAINT [PK_CustomerAddress] PRIMARY KEY CLUSTERED 
 (
-	[service_id] [int] NOT NULL IDENTITY(1,1),
-	[category_id] [int] NOT NULL,
-	[name] [varchar] (50) NOT NULL,
-	[description] [varchar] (200) NOT NULL
+	[customerAddress_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-	CONSTRAINT [PK_Service] PRIMARY KEY CLUSTERED
-	(
-		[service_id] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Product]'))
-BEGIN
-CREATE TABLE [dbo].[Product]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[CustomerBilling]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CustomerBilling](
+	[customerBilling_ID] [int] IDENTITY(1,1) NOT NULL,
+	[cardType] [int] NULL,
+	[cardNumber] [varchar](16) NOT NULL,
+	[expireDate] [date] NOT NULL,
+	[customer_ID] [int] NOT NULL,
+ CONSTRAINT [PK_CustomerBilling] PRIMARY KEY CLUSTERED 
 (
-	[product_ID] [int] NOT NULL IDENTITY(1,1),
-	[category_ID] [int] NOT NULL,
-	[productStatus_ID] [int] NOT NULL,
-	[name] [varchar] (50) NOT NULL,
-	[description] [varchar] (200) NOT NULL,
-	[price] [decimal] (18,2) NOT NULL,
-	[quantity] [int] NOT NULL,
-	[image] [varchar] (200) NOT NULL
+	[customerBilling_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-	CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED
-	(
-		[product_id] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[OrderDetails]'))
-BEGIN
-CREATE TABLE [dbo].[OrderDetails]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[CustomerLogin]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CustomerLogin](
+	[customerLogin_ID] [int] IDENTITY(1,1) NOT NULL,
+	[customer_ID] [int] NOT NULL,
+	[email] [varchar](50) NOT NULL,
+	[password] [varchar](50) NOT NULL,
+	[dateCreated] [date] NOT NULL DEFAULT (getdate()),
+ CONSTRAINT [PK_CustomerLogin] PRIMARY KEY CLUSTERED 
 (
-	[orderDetails_ID] [int] NOT NULL IDENTITY(1,1),
+	[customerLogin_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[OrderDetails]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrderDetails](
+	[orderDetails_ID] [int] IDENTITY(1,1) NOT NULL,
 	[product_ID] [int] NOT NULL,
 	[quantity] [int] NOT NULL,
-	[total] [decimal] (18,2) NOT NULL
-
-	CONSTRAINT [PK_OrderDetails] PRIMARY KEY CLUSTERED
-	(
-		[orderDetails_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Customer]'))
-BEGIN
-CREATE TABLE [dbo].[Customer]
+	[total] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_OrderDetails] PRIMARY KEY CLUSTERED 
 (
-	[customer_ID] [int] NOT NULL IDENTITY(1,1),
-	[firstName] [varchar] (30) NOT NULL,
-	[lastName] [varchar] (30) NOT NULL,
-	[email] [varchar] (30) NOT NULL,
-	[phone] [varchar] (10) NOT NULL
+	[orderDetails_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-	CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED
-	(
-		[customer_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Orders]'))
-BEGIN
-CREATE TABLE [dbo].[Orders]
-(
-	[order_ID] [int] NOT NULL IDENTITY(1,1),
+GO
+/****** Object:  Table [dbo].[Orders]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Orders](
+	[order_ID] [int] IDENTITY(1,1) NOT NULL,
 	[customer_ID] [int] NOT NULL,
 	[shippingAddress_ID] [int] NOT NULL,
 	[customerBilling_ID] [int] NOT NULL,
 	[orderDetails_ID] [int] NOT NULL,
 	[orderStatus_ID] [int] NOT NULL,
 	[shippingMethod_ID] [int] NOT NULL,
-	[orderDate] [date] NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	[tax] [decimal] (18,2) NOT NULL,
-	[grandTotal] [decimal] (18,2) NOT NULL
-	
-	CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED
-	(
-		[order_id] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CustomerBilling]'))
-BEGIN
-CREATE TABLE [dbo].[CustomerBilling]
+	[orderDate] [date] NOT NULL DEFAULT (getdate()),
+	[tax] [decimal](18, 2) NOT NULL,
+	[grandTotal] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED 
 (
-	[customerBilling_ID] [int] NOT NULL IDENTITY(1,1),
-	[cardType] [int] NOT NULL,
-	[cardNumber] [varchar] (16) NOT NULL,
-	[expireDate] [date] NOT NULL
+	[order_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-	CONSTRAINT [PK_CustomerBilling] PRIMARY KEY CLUSTERED
-	(
-		[customerBilling_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CustomerLogin]'))
-BEGIN
-CREATE TABLE [dbo].[CustomerLogin]
-(
-	[customerLogin_ID] [int] NOT NULL IDENTITY(1,1),
-	[customer_ID] [int] NOT NULL,
-	[login] [varchar] (50) NOT NULL,
-	[password] [varchar] (50) NOT NULL,
-	[dateCreated] [date] NOT NULL DEFAULT CURRENT_TIMESTAMP
-	
-	CONSTRAINT [PK_CustomerLogin] PRIMARY KEY CLUSTERED
-	(
-		[customerLogin_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CustomerAddress]'))
-BEGIN
-CREATE TABLE [dbo].[CustomerAddress]
-(
-	[customerAddress_ID] [int] NOT NULL IDENTITY(1,1),
-	[address1] [varchar] (50) NOT NULL,
-	[address2] [varchar] (50),
-	[city] [varchar] (50) NOT NULL,
-	[state] [varchar] (2) NOT NULL,
-	[zip] [varchar] (5) NOT NULL
-	
-	CONSTRAINT [PK_CustomerAddress] PRIMARY KEY CLUSTERED
-	(
-		[customerAddress_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[OrderStatus]'))
-BEGIN
-CREATE TABLE [dbo].[OrderStatus]
-(
-	[orderStatus_ID] [int] NOT NULL IDENTITY(1,1),
+GO
+/****** Object:  Table [dbo].[OrderStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[OrderStatus](
+	[orderStatus_ID] [int] IDENTITY(1,1) NOT NULL,
 	[statusCode] [int] NOT NULL,
-	[description] [varchar] (200) NOT NULL
-
-	CONSTRAINT [PK_OrderStatus] PRIMARY KEY CLUSTERED
-	(
-		[orderStatus_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
-
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ShippingMethod]'))
-BEGIN
-CREATE TABLE [dbo].[ShippingMethod]
+	[description] [varchar](200) NOT NULL,
+ CONSTRAINT [PK_OrderStatus] PRIMARY KEY CLUSTERED 
 (
-	[shippingMethod_ID] [int] NOT NULL IDENTITY(1,1),
-	[type] [varchar] (50) NOT NULL,
-	[shippingCost] [decimal] (18,2) NOT NULL
-	
-	CONSTRAINT [PK_ShippingMethod] PRIMARY KEY CLUSTERED
-	(
-		[shippingMethod_ID] ASC
-	)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)ON [PRIMARY]
-)
-ON [PRIMARY]
-END
+	[orderStatus_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Product]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Product](
+	[product_ID] [int] IDENTITY(1,1) NOT NULL,
+	[category_ID] [int] NOT NULL,
+	[productStatus_ID] [int] NOT NULL,
+	[name] [varchar](50) NOT NULL,
+	[description] [varchar](200) NOT NULL,
+	[price] [decimal](18, 2) NOT NULL,
+	[quantity] [int] NOT NULL,
+	[image] [varchar](200) NOT NULL,
+ CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
+(
+	[product_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Category_AdminLogin]') AND parent_object_id = OBJECT_ID(N'[dbo].[Category]'))
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ProductStatus]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ProductStatus](
+	[productStatus_ID] [int] IDENTITY(1,1) NOT NULL,
+	[statusCode] [varchar](30) NOT NULL,
+	[description] [varchar](200) NOT NULL,
+ CONSTRAINT [PK_[ProductStatus] PRIMARY KEY CLUSTERED 
+(
+	[productStatus_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Services]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Services](
+	[service_id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+	[description] [varchar](200) NOT NULL,
+ CONSTRAINT [PK_Service] PRIMARY KEY CLUSTERED 
+(
+	[service_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ShippingAddress]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ShippingAddress](
+	[shippingAddress_ID] [int] IDENTITY(1,1) NOT NULL,
+	[customer_ID] [int] NOT NULL,
+	[CustomerAddress_ID] [int] NOT NULL,
+	[address1] [varchar](100) NOT NULL,
+	[city] [varchar](100) NOT NULL,
+	[state] [varchar](2) NOT NULL,
+	[zipcode] [varchar](5) NOT NULL,
+	[shippingMethod_ID] [int] NOT NULL,
+ CONSTRAINT [PK_ShippingAddress] PRIMARY KEY CLUSTERED 
+(
+	[shippingAddress_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[ShippingMethod]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ShippingMethod](
+	[shippingMethod_ID] [int] IDENTITY(1,1) NOT NULL,
+	[type] [varchar](50) NOT NULL,
+	[shippingCost] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_ShippingMethod] PRIMARY KEY CLUSTERED 
+(
+	[shippingMethod_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[States]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[States](
+	[StateID] [char](2) NOT NULL,
+	[StateName] [char](30) NOT NULL,
+ CONSTRAINT [PK_States] PRIMARY KEY CLUSTERED 
+(
+	[StateID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Subcategory]    Script Date: 9/24/2015 12:20:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Subcategory](
+	[subcategory_ID] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Subcategory] PRIMARY KEY CLUSTERED 
+(
+	[subcategory_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[AdminLogin] ON 
+
+GO
+INSERT [dbo].[AdminLogin] ([adminLogin_ID], [Username], [password], [attempts], [email], [permissions]) VALUES (1, N'admin', N'admin', 0, N'admin@homeshppe.com', N'admin')
+GO
+SET IDENTITY_INSERT [dbo].[AdminLogin] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Category] ON 
+
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (3, 1, NULL, N'MOBILE PHONES')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (4, 1, NULL, N'DESKTOP')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (5, 1, NULL, N'LAPTOP')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (6, 1, NULL, N'ACCESSORIES')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (7, 1, NULL, N'SOFTWARE')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (8, 1, NULL, N'SPORTS & FITNESS')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (9, 1, NULL, N'FOOTWEAR')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (10, 1, NULL, N'JEWELLERY')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (11, 1, NULL, N'CLOTHING')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (12, 1, NULL, N'HOME DECOR & KITCHEN')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (13, 1, NULL, N'BEAUTY HEALTHCARE')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (14, 1, NULL, N'TOYS, KIDS & BABIES')
+GO
+INSERT [dbo].[Category] ([category_ID], [adminLogin_ID], [subcategory_ID], [name]) VALUES (15, 1, NULL, N'RADIO')
+GO
+SET IDENTITY_INSERT [dbo].[Category] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Customer] ON 
+
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (8, N'Thomas', N'Nunez', N'thomasrnunez@gmail.com', N'4016880739')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (11, N'Thomas', N'Nunez', N'thomasnunez92@gmail.com', N'4016880739')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (12, N'Thomas', N'Nunez', N'thomasnunez92@gmail.com', N'4016880738')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (13, N'Jack', N'Rola', N'jackrola@gmail.com', N'4016880735')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (14, N'Jack', N'Rola', N'jackrola@gmail.com', N'4016880735')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (15, N'Jack', N'Rola', N'jackrola@gmail.com', N'4016880735')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (16, N'Jack', N'Rola', N'jackrola92@gmail.com', N'4016880735')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (17, N'Jack', N'Rola', N'jackrola92@gmail.com', N'4016880735')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (18, N'Jack', N'Rola', N'jackrola92@gmail.com', N'4016880735')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (19, N'Jack', N'Rola', N'jackrola92@gmail.com', N'4016880735')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (20, N'Jack', N'Rola', N'jackrola92@gmail.com', N'4016880735')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (21, N'Jack', N'Rola', N'thomasnunez922@gmail.com', N'4016880735')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (22, N'Jack', N'Rola', N'thomasnunez9w2@gmail.com', N'4016880735')
+GO
+INSERT [dbo].[Customer] ([customer_ID], [firstName], [lastName], [email], [phone]) VALUES (23, N'Jack', N'Rola', N'thomasnunez92@gmail.com', N'4016880735')
+GO
+SET IDENTITY_INSERT [dbo].[Customer] OFF
+GO
+SET IDENTITY_INSERT [dbo].[CustomerAddress] ON 
+
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (1, N'230 Dexter street D203', N'Address2', N'Providence', N'RI', N'02907', 8)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (2, N'230 Dexter street D203', N'Address2', N'Providence', N'RI', N'02907', 8)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (3, N'230 Dexter street D203', N'Address2', N'Providence', N'RI', N'02907', 8)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (4, N'230 Dexter street D203', N'Address2', N'Providence', N'RI', N'02907', 8)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (5, N'230 Dexter street D203', N'Address2', N'Providence', N'RI', N'02907', 8)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (6, N'Address1', N'Address2', N'City', N'AL', N'Zip', 8)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (7, N'Address1', N'Address2', N'City', N'AL', N'Zip', 8)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (8, N'230 Dexter street D203', N'Address2', N'Providence', N'RI', N'02907', 8)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (9, N'230 Dexter street D203', N'Address2', N'Providence', N'RI', N'02907', 8)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (10, N'123 school st', N'Address2', N'cc', N'AK', N'02864', 8)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (11, N'230 Dexter street D203', N'Address2', N'Providence', N'RI', N'02907', 8)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (12, N'230 Dexter street D203', N'Address2', N'Providence', N'RI', N'02914', 12)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (18, N'2 water street', N'Address2', N'Providence', N'RI', N'02909', 20)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (19, N'2 water street', N'Address2', N'Providence', N'RI', N'02909', 21)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (20, N'2 water street', N'Address2', N'Providence', N'RI', N'02909', 22)
+GO
+INSERT [dbo].[CustomerAddress] ([customerAddress_ID], [address1], [address2], [city], [state], [zip], [customer_ID]) VALUES (21, N'2 water street', N'Address2', N'Providence', N'RI', N'02909', 23)
+GO
+SET IDENTITY_INSERT [dbo].[CustomerAddress] OFF
+GO
+SET IDENTITY_INSERT [dbo].[CustomerBilling] ON 
+
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (1, 3, N'34234543234', CAST(N'0001-01-01' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (2, 0, N'34234543234', CAST(N'0001-01-01' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (3, 0, N'34234543234', CAST(N'0001-01-01' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (4, 0, N'34234543234', CAST(N'2015-08-08' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (5, 0, N'34234543234', CAST(N'2015-08-08' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (6, 0, N'34234543234', CAST(N'2015-08-08' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (7, 0, N'234523452345', CAST(N'2015-08-08' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (8, 0, N'1234132', CAST(N'2015-08-18' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (9, 0, N'1234132', CAST(N'2015-08-18' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (10, 0, N'1234132', CAST(N'2015-08-18' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (11, 0, N'1234132', CAST(N'2015-08-18' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (12, 0, N'1234132', CAST(N'2015-08-18' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (13, 0, N'1234132', CAST(N'2015-08-18' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (14, 0, N'1234132', CAST(N'2015-08-18' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (15, 0, N'1234132', CAST(N'2015-08-18' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (16, 0, N'1234132', CAST(N'2015-08-18' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (17, 0, N'1234132', CAST(N'2015-08-18' AS Date), 12)
+GO
+INSERT [dbo].[CustomerBilling] ([customerBilling_ID], [cardType], [cardNumber], [expireDate], [customer_ID]) VALUES (18, 0, N'1234658979', CAST(N'0001-01-01' AS Date), 12)
+GO
+SET IDENTITY_INSERT [dbo].[CustomerBilling] OFF
+GO
+SET IDENTITY_INSERT [dbo].[CustomerLogin] ON 
+
+GO
+INSERT [dbo].[CustomerLogin] ([customerLogin_ID], [customer_ID], [email], [password], [dateCreated]) VALUES (11, 12, N'thomasnunez92@gmail.com', N'7f2ababa423061c509f4923dd04b6cf1', CAST(N'2015-09-23' AS Date))
+GO
+INSERT [dbo].[CustomerLogin] ([customerLogin_ID], [customer_ID], [email], [password], [dateCreated]) VALUES (13, 20, N'jackrola92@gmail.com', N'7f2ababa423061c509f4923dd04b6cf1', CAST(N'2015-09-23' AS Date))
+GO
+INSERT [dbo].[CustomerLogin] ([customerLogin_ID], [customer_ID], [email], [password], [dateCreated]) VALUES (14, 21, N'thomasnunez922@gmail.com', N'7f2ababa423061c509f4923dd04b6cf1', CAST(N'2015-09-23' AS Date))
+GO
+INSERT [dbo].[CustomerLogin] ([customerLogin_ID], [customer_ID], [email], [password], [dateCreated]) VALUES (15, 22, N'thomasnunez9w2@gmail.com', N'7f2ababa423061c509f4923dd04b6cf1', CAST(N'2015-09-23' AS Date))
+GO
+INSERT [dbo].[CustomerLogin] ([customerLogin_ID], [customer_ID], [email], [password], [dateCreated]) VALUES (16, 23, N'thomasnunez92@gmail.com', N'7f2ababa423061c509f4923dd04b6cf1', CAST(N'2015-09-23' AS Date))
+GO
+SET IDENTITY_INSERT [dbo].[CustomerLogin] OFF
+GO
+SET IDENTITY_INSERT [dbo].[OrderDetails] ON 
+
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (1, 3, 2, CAST(0.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (2, 3, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (3, 3, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (4, 3, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (5, 3, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (6, 3, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (7, 4, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (8, 3, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (9, 4, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (10, 3, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (11, 4, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (12, 3, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (13, 4, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[OrderDetails] ([orderDetails_ID], [product_ID], [quantity], [total]) VALUES (14, 3, 2, CAST(21.00 AS Decimal(18, 2)))
+GO
+SET IDENTITY_INSERT [dbo].[OrderDetails] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Orders] ON 
+
+GO
+INSERT [dbo].[Orders] ([order_ID], [customer_ID], [shippingAddress_ID], [customerBilling_ID], [orderDetails_ID], [orderStatus_ID], [shippingMethod_ID], [orderDate], [tax], [grandTotal]) VALUES (1, 12, 16, 13, 5, 1, 1, CAST(N'2015-09-22' AS Date), CAST(1.47 AS Decimal(18, 2)), CAST(22.47 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Orders] ([order_ID], [customer_ID], [shippingAddress_ID], [customerBilling_ID], [orderDetails_ID], [orderStatus_ID], [shippingMethod_ID], [orderDate], [tax], [grandTotal]) VALUES (2, 12, 17, 14, 6, 1, 1, CAST(N'2015-09-22' AS Date), CAST(1.47 AS Decimal(18, 2)), CAST(22.47 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Orders] ([order_ID], [customer_ID], [shippingAddress_ID], [customerBilling_ID], [orderDetails_ID], [orderStatus_ID], [shippingMethod_ID], [orderDate], [tax], [grandTotal]) VALUES (3, 12, 17, 14, 7, 1, 1, CAST(N'2015-09-22' AS Date), CAST(1.47 AS Decimal(18, 2)), CAST(22.47 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Orders] ([order_ID], [customer_ID], [shippingAddress_ID], [customerBilling_ID], [orderDetails_ID], [orderStatus_ID], [shippingMethod_ID], [orderDate], [tax], [grandTotal]) VALUES (4, 12, 18, 15, 8, 1, 1, CAST(N'2015-09-22' AS Date), CAST(1.47 AS Decimal(18, 2)), CAST(22.47 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Orders] ([order_ID], [customer_ID], [shippingAddress_ID], [customerBilling_ID], [orderDetails_ID], [orderStatus_ID], [shippingMethod_ID], [orderDate], [tax], [grandTotal]) VALUES (5, 12, 18, 15, 9, 1, 1, CAST(N'2015-09-22' AS Date), CAST(1.47 AS Decimal(18, 2)), CAST(22.47 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Orders] ([order_ID], [customer_ID], [shippingAddress_ID], [customerBilling_ID], [orderDetails_ID], [orderStatus_ID], [shippingMethod_ID], [orderDate], [tax], [grandTotal]) VALUES (6, 12, 19, 16, 10, 1, 1, CAST(N'2015-09-22' AS Date), CAST(1.47 AS Decimal(18, 2)), CAST(22.47 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Orders] ([order_ID], [customer_ID], [shippingAddress_ID], [customerBilling_ID], [orderDetails_ID], [orderStatus_ID], [shippingMethod_ID], [orderDate], [tax], [grandTotal]) VALUES (7, 12, 19, 16, 11, 1, 1, CAST(N'2015-09-22' AS Date), CAST(1.47 AS Decimal(18, 2)), CAST(22.47 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Orders] ([order_ID], [customer_ID], [shippingAddress_ID], [customerBilling_ID], [orderDetails_ID], [orderStatus_ID], [shippingMethod_ID], [orderDate], [tax], [grandTotal]) VALUES (8, 12, 20, 17, 12, 1, 1, CAST(N'2015-09-22' AS Date), CAST(1.47 AS Decimal(18, 2)), CAST(22.47 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Orders] ([order_ID], [customer_ID], [shippingAddress_ID], [customerBilling_ID], [orderDetails_ID], [orderStatus_ID], [shippingMethod_ID], [orderDate], [tax], [grandTotal]) VALUES (9, 12, 20, 17, 13, 1, 1, CAST(N'2015-09-22' AS Date), CAST(1.47 AS Decimal(18, 2)), CAST(22.47 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Orders] ([order_ID], [customer_ID], [shippingAddress_ID], [customerBilling_ID], [orderDetails_ID], [orderStatus_ID], [shippingMethod_ID], [orderDate], [tax], [grandTotal]) VALUES (10, 12, 21, 18, 14, 1, 1, CAST(N'2015-09-23' AS Date), CAST(1.47 AS Decimal(18, 2)), CAST(22.47 AS Decimal(18, 2)))
+GO
+SET IDENTITY_INSERT [dbo].[Orders] OFF
+GO
+SET IDENTITY_INSERT [dbo].[OrderStatus] ON 
+
+GO
+INSERT [dbo].[OrderStatus] ([orderStatus_ID], [statusCode], [description]) VALUES (1, 1, N'Pending')
+GO
+INSERT [dbo].[OrderStatus] ([orderStatus_ID], [statusCode], [description]) VALUES (2, 2, N'Shipped')
+GO
+INSERT [dbo].[OrderStatus] ([orderStatus_ID], [statusCode], [description]) VALUES (3, 3, N'Delivered')
+GO
+SET IDENTITY_INSERT [dbo].[OrderStatus] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Product] ON 
+
+GO
+INSERT [dbo].[Product] ([product_ID], [category_ID], [productStatus_ID], [name], [description], [price], [quantity], [image]) VALUES (3, 3, 1, N'product1', N'product', CAST(10.50 AS Decimal(18, 2)), 2, N'/images/MobilePhones/abc.jpg')
+GO
+INSERT [dbo].[Product] ([product_ID], [category_ID], [productStatus_ID], [name], [description], [price], [quantity], [image]) VALUES (4, 3, 1, N'product2', N'product', CAST(10.50 AS Decimal(18, 2)), 2, N'/images/MobilePhones/acer.jpg')
+GO
+INSERT [dbo].[Product] ([product_ID], [category_ID], [productStatus_ID], [name], [description], [price], [quantity], [image]) VALUES (5, 3, 1, N'product3', N'product', CAST(10.50 AS Decimal(18, 2)), 2, N'/images/MobilePhones/asw.jpg')
+GO
+INSERT [dbo].[Product] ([product_ID], [category_ID], [productStatus_ID], [name], [description], [price], [quantity], [image]) VALUES (6, 3, 1, N'product4', N'product', CAST(10.50 AS Decimal(18, 2)), 2, N'/images/MobilePhones/blackberry.jpg')
+GO
+INSERT [dbo].[Product] ([product_ID], [category_ID], [productStatus_ID], [name], [description], [price], [quantity], [image]) VALUES (7, 3, 1, N'product5', N'product', CAST(10.50 AS Decimal(18, 2)), 2, N'/images/MobilePhones/cdc.jpg')
+GO
+INSERT [dbo].[Product] ([product_ID], [category_ID], [productStatus_ID], [name], [description], [price], [quantity], [image]) VALUES (8, 4, 1, N'product6', N'product', CAST(10.50 AS Decimal(18, 2)), 2, N'/images/MobilePhones/hgh.jpg')
+GO
+INSERT [dbo].[Product] ([product_ID], [category_ID], [productStatus_ID], [name], [description], [price], [quantity], [image]) VALUES (9, 3, 1, N'product7', N'product', CAST(11.50 AS Decimal(18, 2)), 2, N'/images/MobilePhones/iphone.jpg')
+GO
+INSERT [dbo].[Product] ([product_ID], [category_ID], [productStatus_ID], [name], [description], [price], [quantity], [image]) VALUES (10, 3, 1, N'product8', N'product', CAST(12.54 AS Decimal(18, 2)), 2, N'/images/MobilePhones/Nokea.jpg')
+GO
+INSERT [dbo].[Product] ([product_ID], [category_ID], [productStatus_ID], [name], [description], [price], [quantity], [image]) VALUES (11, 3, 1, N'product9', N'product', CAST(51.14 AS Decimal(18, 2)), 2, N'/images/MobilePhones/Samsung-Galaxy-S3.jpg')
+GO
+INSERT [dbo].[Product] ([product_ID], [category_ID], [productStatus_ID], [name], [description], [price], [quantity], [image]) VALUES (12, 3, 1, N'product10', N'product', CAST(45.11 AS Decimal(18, 2)), 5, N'/images/MobilePhones/ttt.jpg')
+GO
+INSERT [dbo].[Product] ([product_ID], [category_ID], [productStatus_ID], [name], [description], [price], [quantity], [image]) VALUES (13, 3, 1, N'product11', N'product', CAST(77.00 AS Decimal(18, 2)), 5, N'/images/MobilePhones/wsqa.jpg')
+GO
+SET IDENTITY_INSERT [dbo].[Product] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ProductStatus] ON 
+
+GO
+INSERT [dbo].[ProductStatus] ([productStatus_ID], [statusCode], [description]) VALUES (1, N'1', N'In Stock')
+GO
+INSERT [dbo].[ProductStatus] ([productStatus_ID], [statusCode], [description]) VALUES (2, N'2', N'Out Of Stock')
+GO
+SET IDENTITY_INSERT [dbo].[ProductStatus] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ShippingAddress] ON 
+
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (3, 12, 12, N'230 Dexter street D203', N'providence', N'RI', N'02907', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (4, 12, 12, N'230 Dexter street D203', N'providence', N'RI', N'02907', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (5, 12, 12, N'230 Dexter street D203', N'providence', N'RI', N'02907', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (6, 12, 12, N'230 Dexter street D203', N'providence', N'RI', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (7, 12, 12, N'230 Dexter street D203', N'providence', N'RI', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (8, 12, 12, N'230 Dexter street D203', N'providence', N'RI', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (9, 12, 12, N'151 Franklin Road', N'Foster', N'RI', N'02825', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (10, 12, 12, N'230 Dexter street', N'providence', N'RI', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (11, 12, 12, N'230 Dexter street', N'providence', N'RI', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (12, 12, 12, N'230 Dexter street', N'providence', N'RI', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (14, 12, 12, N'230 Dexter street', N'providence', N'AK', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (15, 12, 12, N'230 Dexter street', N'providence', N'AK', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (16, 12, 12, N'230 Dexter street', N'providence', N'RI', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (17, 12, 12, N'230 Dexter street', N'providence', N'RI', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (18, 12, 12, N'230 Dexter street', N'providence', N'RI', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (19, 12, 12, N'230 Dexter street', N'providence', N'RI', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (20, 12, 12, N'230 Dexter street', N'providence', N'RI', N'02920', 1)
+GO
+INSERT [dbo].[ShippingAddress] ([shippingAddress_ID], [customer_ID], [CustomerAddress_ID], [address1], [city], [state], [zipcode], [shippingMethod_ID]) VALUES (21, 12, 12, N'2 street', N'providence', N'RI', N'02909', 1)
+GO
+SET IDENTITY_INSERT [dbo].[ShippingAddress] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ShippingMethod] ON 
+
+GO
+INSERT [dbo].[ShippingMethod] ([shippingMethod_ID], [type], [shippingCost]) VALUES (1, N'2day', CAST(15.99 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[ShippingMethod] ([shippingMethod_ID], [type], [shippingCost]) VALUES (2, N'Ground', CAST(7.99 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[ShippingMethod] ([shippingMethod_ID], [type], [shippingCost]) VALUES (3, N'Express', CAST(9.99 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[ShippingMethod] ([shippingMethod_ID], [type], [shippingCost]) VALUES (4, N'NextDay', CAST(19.99 AS Decimal(18, 2)))
+GO
+SET IDENTITY_INSERT [dbo].[ShippingMethod] OFF
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'AK', N'ALASKA                        ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'AL', N'ALABAMA                       ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'AR', N'ARKANSAS                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'AZ', N'ARIZONA                       ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'CA', N'CALIFORNIA                    ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'CO', N'COLORADO                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'CT', N'CONNECTICUT                   ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'DC', N'DISTRICT OF COLUMBI           ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'DE', N'DELAWARE                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'FL', N'FLORIDA                       ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'GA', N'GEORGIA                       ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'HI', N'HAWAII                        ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'IA', N'IOWA                          ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'ID', N'IDAHO                         ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'IL', N'ILLINOIS                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'IN', N'INDIANA                       ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'KS', N'KANSAS                        ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'KY', N'KENTUCKY                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'LA', N'LOUISIANA                     ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'MA', N'MASSACHUSETTS                 ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'MD', N'MARYLAND                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'ME', N'MAINE                         ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'MI', N'MICHIGAN                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'MN', N'MINNESOTA                     ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'MO', N'MISSOURI                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'MS', N'MISSISSIPPI                   ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'MT', N'MONTANA                       ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'NC', N'NORTH CAROLINA                ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'ND', N'NORTH DAKOTA                  ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'NE', N'NEBRASKA                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'NH', N'NEW HAMPSHIRE                 ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'NJ', N'NEW JERSEY                    ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'NM', N'NEW MEXICO                    ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'NV', N'NEVADA                        ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'NY', N'NEW YORK                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'OH', N'OHIO                          ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'OK', N'OKLAHOMA                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'OR', N'OREGON                        ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'PA', N'PENNSYLVANIA                  ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'RI', N'RHODE ISLAND                  ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'SC', N'SOUTH CAROLINA                ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'SD', N'SOUTH DAKOTA                  ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'TN', N'TENNESSEE                     ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'TX', N'TEXAS                         ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'UT', N'UTAH                          ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'VA', N'VIRGINIA                      ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'VT', N'VERMONT                       ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'WA', N'WASHINGTON                    ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'WI', N'WISCONSIN                     ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'WV', N'WEST VIRGINIA                 ')
+GO
+INSERT [dbo].[States] ([StateID], [StateName]) VALUES (N'WY', N'WYOMING                       ')
+GO
 ALTER TABLE [dbo].[Category]  WITH CHECK ADD  CONSTRAINT [FK_Category_AdminLogin] FOREIGN KEY([adminLogin_ID])
 REFERENCES [dbo].[AdminLogin] ([adminLogin_ID])
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Category_Subcategory]') AND parent_object_id = OBJECT_ID(N'[dbo].[Category]'))
+ALTER TABLE [dbo].[Category] CHECK CONSTRAINT [FK_Category_AdminLogin]
+GO
 ALTER TABLE [dbo].[Category]  WITH CHECK ADD  CONSTRAINT [FK_Category_Subcategory] FOREIGN KEY([subcategory_ID])
 REFERENCES [dbo].[Subcategory] ([subcategory_ID])
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ShippingAddress_Customer]') AND parent_object_id = OBJECT_ID(N'[dbo].[ShippingAddress]'))
-ALTER TABLE [dbo].[ShippingAddress]  WITH CHECK ADD  CONSTRAINT [FK_ShippingAddress_Customer] FOREIGN KEY([customer_ID])
+ALTER TABLE [dbo].[Category] CHECK CONSTRAINT [FK_Category_Subcategory]
+GO
+ALTER TABLE [dbo].[CustomerAddress]  WITH CHECK ADD  CONSTRAINT [FK_CustomerAddress_Customer] FOREIGN KEY([customer_ID])
 REFERENCES [dbo].[Customer] ([customer_ID])
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ShippingAddress_CustomerAddress]') AND parent_object_id = OBJECT_ID(N'[dbo].[ShippingAddress]'))
-ALTER TABLE [dbo].[ShippingAddress]  WITH CHECK ADD  CONSTRAINT [FK_ShippingAddress_CustomerAddress] FOREIGN KEY([customerAddress_ID])
-REFERENCES [dbo].[CustomerAddress] ([customerAddress_ID])
+ALTER TABLE [dbo].[CustomerAddress] CHECK CONSTRAINT [FK_CustomerAddress_Customer]
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Service_Category]') AND parent_object_id = OBJECT_ID(N'[dbo].[Services]'))
-ALTER TABLE [dbo].[Services]  WITH CHECK ADD  CONSTRAINT [FK_Service_Category] FOREIGN KEY([category_ID])
-REFERENCES [dbo].[Category] ([category_ID])
+ALTER TABLE [dbo].[CustomerBilling]  WITH CHECK ADD  CONSTRAINT [FK_CustomerBilling_Customer] FOREIGN KEY([customer_ID])
+REFERENCES [dbo].[Customer] ([customer_ID])
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Product_Category]') AND parent_object_id = OBJECT_ID(N'[dbo].[Category]'))
-ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_Category] FOREIGN KEY([category_ID])
-REFERENCES [dbo].[Category] ([category_ID])
+ALTER TABLE [dbo].[CustomerBilling] CHECK CONSTRAINT [FK_CustomerBilling_Customer]
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Product_ProductStatus]') AND parent_object_id = OBJECT_ID(N'[dbo].[ProductStatus]'))
-ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_ProductStatus] FOREIGN KEY([productStatus_ID])
-REFERENCES [dbo].[ProductStatus] ([productStatus_ID])
+ALTER TABLE [dbo].[CustomerLogin]  WITH CHECK ADD  CONSTRAINT [FK_CustomerLogin_Customer] FOREIGN KEY([customer_ID])
+REFERENCES [dbo].[Customer] ([customer_ID])
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_OrderDetails_Product]') AND parent_object_id = OBJECT_ID(N'[dbo].[Product]'))
+ALTER TABLE [dbo].[CustomerLogin] CHECK CONSTRAINT [FK_CustomerLogin_Customer]
+GO
 ALTER TABLE [dbo].[OrderDetails]  WITH CHECK ADD  CONSTRAINT [FK_OrderDetails_Product] FOREIGN KEY([product_ID])
 REFERENCES [dbo].[Product] ([product_ID])
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_Customer]') AND parent_object_id = OBJECT_ID(N'[dbo].[Customer]'))
+ALTER TABLE [dbo].[OrderDetails] CHECK CONSTRAINT [FK_OrderDetails_Product]
+GO
 ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_Customer] FOREIGN KEY([customer_ID])
 REFERENCES [dbo].[Customer] ([customer_ID])
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_ShippingAddress]') AND parent_object_id = OBJECT_ID(N'[dbo].[ShippingAddress]'))
-ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_ShippingAddress] FOREIGN KEY([shippingAddress_ID])
-REFERENCES [dbo].[ShippingAddress] ([shippingAddress_ID])
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_Customer]
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_CustomerBilling]') AND parent_object_id = OBJECT_ID(N'[dbo].[CustomerBilling]'))
 ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_CustomerBilling] FOREIGN KEY([customerBilling_ID])
 REFERENCES [dbo].[CustomerBilling] ([customerBilling_ID])
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_OrderDetails]') AND parent_object_id = OBJECT_ID(N'[dbo].[OrderDetails]'))
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_CustomerBilling]
+GO
 ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_OrderDetails] FOREIGN KEY([orderDetails_ID])
 REFERENCES [dbo].[OrderDetails] ([orderDetails_ID])
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_OrderStatus]') AND parent_object_id = OBJECT_ID(N'[dbo].[OrderStatus]'))
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_OrderDetails]
+GO
 ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_OrderStatus] FOREIGN KEY([orderStatus_ID])
 REFERENCES [dbo].[OrderStatus] ([orderStatus_ID])
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Orders_ShippingMethod]') AND parent_object_id = OBJECT_ID(N'[dbo].[ShippingMethod]'))
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_OrderStatus]
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_ShippingAddress] FOREIGN KEY([shippingAddress_ID])
+REFERENCES [dbo].[ShippingAddress] ([shippingAddress_ID])
+GO
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_ShippingAddress]
+GO
 ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_ShippingMethod] FOREIGN KEY([shippingMethod_ID])
 REFERENCES [dbo].[ShippingMethod] ([shippingMethod_ID])
 GO
-
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_CustomerLogin_Customer]') AND parent_object_id = OBJECT_ID(N'[dbo].[Customer]'))
-ALTER TABLE [dbo].[CustomerLogin]  WITH CHECK ADD  CONSTRAINT [FK_CustomerLogin_Customer] FOREIGN KEY([customer_ID])
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Orders_ShippingMethod]
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_Category] FOREIGN KEY([category_ID])
+REFERENCES [dbo].[Category] ([category_ID])
+GO
+ALTER TABLE [dbo].[Product] CHECK CONSTRAINT [FK_Product_Category]
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_ProductStatus] FOREIGN KEY([productStatus_ID])
+REFERENCES [dbo].[ProductStatus] ([productStatus_ID])
+GO
+ALTER TABLE [dbo].[Product] CHECK CONSTRAINT [FK_Product_ProductStatus]
+GO
+ALTER TABLE [dbo].[ShippingAddress]  WITH CHECK ADD  CONSTRAINT [FK_ShippingAddress_Customer] FOREIGN KEY([customer_ID])
 REFERENCES [dbo].[Customer] ([customer_ID])
+GO
+ALTER TABLE [dbo].[ShippingAddress] CHECK CONSTRAINT [FK_ShippingAddress_Customer]
+GO
+ALTER TABLE [dbo].[ShippingAddress]  WITH CHECK ADD  CONSTRAINT [FK_ShippingAddress_CustomerAddress] FOREIGN KEY([CustomerAddress_ID])
+REFERENCES [dbo].[CustomerAddress] ([customerAddress_ID])
+GO
+ALTER TABLE [dbo].[ShippingAddress] CHECK CONSTRAINT [FK_ShippingAddress_CustomerAddress]
+GO
+ALTER TABLE [dbo].[ShippingAddress]  WITH CHECK ADD  CONSTRAINT [FK_ShippingAddress_ShippingMethod] FOREIGN KEY([shippingMethod_ID])
+REFERENCES [dbo].[ShippingMethod] ([shippingMethod_ID])
+GO
+ALTER TABLE [dbo].[ShippingAddress] CHECK CONSTRAINT [FK_ShippingAddress_ShippingMethod]
+GO
+USE [master]
+GO
+ALTER DATABASE [SE425JR] SET  READ_WRITE 
 GO
